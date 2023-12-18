@@ -27,3 +27,42 @@ npm install
 ```bash
 npm run dev
 ```
+## Guide for using Kuberenetes
+
+# Go to client
+```bash
+cd client
+```
+
+# Build the image 
+```bash
+docker build -t mihirvir10/client-m .
+```
+
+# Push the image
+```bash
+docker push mihirvir10/client-m
+```
+
+# Got to infra/k8s directory
+
+# Apply the kubernetes file 
+```bash
+kubectl apply -f client-depl.yaml
+```
+
+## After applying to acccess the client from externat source you need to do the following
+
+# using docker desktop kubernetes
+```localhost:<nodeport>```
+
+
+# using minikube
+
+get the minikube ip
+```bash
+minikube ip
+```
+
+then to access the client do this
+```<minikube_ip>:<nodeport>```
