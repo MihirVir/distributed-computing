@@ -32,9 +32,9 @@
 }
 
 .plane-img {
-    animation: animate_img 400ms 1 ease-in-out;
-    animation: normal_animation 10s 400ms infinite ease;
+    animation: animate_img 400ms 1 ease-in-out, normal_animation 10s 450ms infinite ease; 
 }
+
 .submit-btn {
     width: 100%;
     height: 20%;
@@ -56,10 +56,10 @@
 }
 @keyframes normal_animation {
     0% {
-        transform: translateX(10%) translateY(-10%);
-    } 50% {
         transform: translateX(0%) translateY(0%);
+    } 50% {
+        transform: translateX(10%) translateY(10%);
     } 100% {
-        transform: translateX(10%) translateY(-10%);
+        transform: translateX(0%) translateY(0%);
     }
 }
