@@ -1,0 +1,65 @@
+.airplane-container {
+    width: 98%;
+    height: 100%;
+    align-items: center;
+    gap: 1rem;
+    display: flex;
+    overflow: hidden;
+}
+.image-container {
+    width: 50%;
+    height: 90%;
+}
+.search-bar-container {
+    width: 50%;
+    height: 90%;
+}
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+
+}
+.text-field {
+    padding: .75rem;
+    height: 20%;
+    font-size: 1.15rem;
+    width: 49%;
+    outline: none; 
+    border: none;
+    border-radius: .25rem;
+}
+
+.plane-img {
+    animation: animate_img 400ms 1 ease-in-out;
+    animation: normal_animation 10s 400ms infinite ease;
+}
+.submit-btn {
+    width: 100%;
+    height: 20%;
+    border: none;
+    border-radius: .25rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: #0369a1;
+    color: #ecfeff;
+    outline: none;
+}
+@keyframes animate_img {
+    0% {
+        transform: translateX(100%) translateY(100%);
+    } 100% {
+        transform: translateX(0%) translateY(0%);
+    }
+}
+@keyframes normal_animation {
+    0% {
+        transform: translateX(10%) translateY(-10%);
+    } 50% {
+        transform: translateX(0%) translateY(0%);
+    } 100% {
+        transform: translateX(10%) translateY(-10%);
+    }
+}
