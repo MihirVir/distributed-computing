@@ -44,7 +44,7 @@ docker build -t mihirvir10/client-m .
 docker push mihirvir10/client-m
 ```
 
-# Got to infra/k8s directory
+# Go to infra/k8s directory
 
 # Apply the kubernetes file 
 ```bash
