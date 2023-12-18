@@ -1,0 +1,39 @@
+.nav {
+    display: flex;
+    width: 98%;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    color: white;
+}
+
+.logo {
+    font-size: 1.45rem;
+    text-transform: uppercase;
+    letter-spacing: .4rem;  
+    font-weight: 600;
+}
+
+.nav-links {
+    display: flex;
+    width: 15%;
+    justify-content: space-around;
+}
+
+.nav-links li {
+    list-style: none;
+    cursor: pointer;
+}
+
+.nav-links li::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: all 200ms ease-in-out;
+}
+
+.nav-links li:hover::after {
+    width: 100%;
+}
