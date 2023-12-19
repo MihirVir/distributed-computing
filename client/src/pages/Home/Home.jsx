@@ -4,6 +4,7 @@ import Search from '../../components/Search/Search'
 import Card from '../../components/Card/Card'
 import "./home.css"
 import Popular from '../../components/Popular/Popular'
+import Explore from '../../components/Explore/Explore'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
           <Search />
       </header>     
       <main className = "main">
+          <Explore />
           <Card />
           <Popular />
       </main>

@@ -15,24 +15,35 @@
     height: 90%;
 }
 .search-form {
+    margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
     height: 100%;
     width: 100%;
-
+    flex-direction: column;
 }
 .text-field {
     padding: .75rem;
-    height: 20%;
+    height: 60%;
     font-size: 1.15rem;
     width: 49%;
     outline: none; 
     border: none;
     border-radius: .25rem;
+    transition: all 100ms;
 }
-
+.text-field:focus {
+    border: 2px solid #65a30d;   
+}
 .plane-img {
     animation: animate_img 400ms 1 ease-in-out, normal_animation 10s 450ms infinite ease; 
+}
+.input-fields {
+    margin-top: .5rem;
+    height: 30%;
+}
+.radio label {
+    color: white;
 }
 
 .submit-btn {
@@ -43,13 +54,13 @@
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background-color: rgb(3,97,227);
+    background-color: #020617;
     color: #ecfeff;
     outline: none;
     transition: all 250ms ease;
 }
 .submit-btn:hover {
-    box-shadow: 5px 8px 0px 0px black; 
+    box-shadow: 2px 2px 0px 0px white; 
     transform: translateY(-4px);
 }
 

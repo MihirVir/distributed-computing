@@ -8,6 +8,7 @@
     font-size: .9rem;
     margin-top: .5rem;
 }
+
 .card-wrapper {
     position: relative;
     margin-top: 1rem;
@@ -19,6 +20,7 @@
     flex-wrap: wrap;
     margin-bottom: 1rem;
 }
+
 .card {
     position: relative;
     width: 30%;
@@ -42,6 +44,7 @@
     object-fit: cover;
     border-radius:2px;
 }
+
 .location-name {
     font-size: .9rem;
     cursor: pointer;
