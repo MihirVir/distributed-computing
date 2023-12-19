@@ -2,7 +2,7 @@
 
 Follow these steps to get the app up and running on your local machine:
 
-### Prerequisites
+## Prerequisites
 
 Make sure you have the following installed:
 
@@ -10,59 +10,56 @@ Make sure you have the following installed:
 - npm (usually comes with Node.js installation)
 - Git
 
-# To navigate to the project directory, use:
+### To navigate to the project directory, use:
 
 ```bash
 cd client
 ```
 
-# To install dependencies, use:
+### To install dependencies, use:
 
 ```bash
 npm install
 ```
 
-# To run the project, use:
+### To run the project, use:
 
 ```bash
 npm run dev
 ```
 ## Guide for using Kuberenetes
 
-# Go to client
+### Go to client
 ```bash
 cd client
 ```
 
-# Build the image 
+### Build the image 
 ```bash
 docker build -t mihirvir10/client-m .
 ```
 
-# Push the image
+### Push the image
 ```bash
 docker push mihirvir10/client-m
 ```
 
-# Go to infra/k8s directory
+### Go to infra/k8s directory
 
 # Apply the kubernetes file 
 ```bash
 kubectl apply -f client-depl.yaml
 ```
 
-## After applying to acccess the client from externat source you need to do the following
+## After applying to acccess the client from external source you need to do the following
 
-# using docker desktop kubernetes
+### using docker desktop kubernetes
 ```localhost:<nodeport>```
 
 
-# using minikube
+### using minikube
 
 get the minikube ip
 ```bash
-minikube ip
+minikube service client-service
 ```
-
-then to access the client do this
-```<minikube_ip>:<nodeport>```
