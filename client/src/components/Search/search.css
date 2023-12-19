@@ -36,17 +36,24 @@
 }
 
 .submit-btn {
-    width: 100%;
+    width: 98%;
     height: 20%;
     border: none;
     border-radius: .25rem;
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background-color: #0369a1;
+    background-color: rgb(3,97,227);
     color: #ecfeff;
     outline: none;
+    transition: all 250ms ease;
 }
+.submit-btn:hover {
+    box-shadow: 5px 8px 0px 0px black; 
+    transform: translateY(-4px);
+}
+
+
 @keyframes animate_img {
     0% {
         transform: translateX(100%) translateY(100%);

@@ -1,0 +1,58 @@
+.popular-wrapper {
+    margin-top: 2rem;
+    width: 80%;
+    min-height: 40vh;
+}
+.popular-para {
+    font-weight: 400;
+    font-size: .9rem;
+    margin-top: .5rem;
+}
+.card-wrapper {
+    position: relative;
+    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding: .5rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+.card {
+    position: relative;
+    width: 30%;
+    background-color: white;
+    box-shadow: 0px 2px 3px 1px rgba(37,32,31,.3);
+    border-radius: .25rem;
+    height: 80px;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    transition: all 200ms ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-image {
+    width: 30%;
+    height: 80px;
+    object-fit: cover;
+    border-radius:2px;
+}
+.location-name {
+    font-size: .9rem;
+    cursor: pointer;
+}
+
+.tags {
+    font-size: .8rem;
+    font-weight: 300;
+    cursor: pointer;
+}
+.tags:hover {
+    color: blue;
+    text-decoration: underline;
+}

@@ -10,7 +10,7 @@ const Search = () => {
             <form className = "search-form">
                 <input className = "text-field" style ={{marginRight: "1.2%"}} type="text" placeholder='From'/>
                 <input className = "text-field" type="text" placeholder='To'/>
-                <button className='submit-btn'>Submit</button>
+                <button className='submit-btn'>Search</button>
             </form>
         </div>
     </div>
