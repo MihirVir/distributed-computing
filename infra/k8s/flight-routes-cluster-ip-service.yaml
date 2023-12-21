@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flight-routes-cluster-ip-service
+spec:
+  selector:
+    app: flight-routes
+  ports:
+    - port: 8000
+      targetPort: 8000
+  type: ClusterIP
