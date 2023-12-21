@@ -12,6 +12,28 @@ export const fetchData = createAsyncThunk(
         }
     }
 )
+
+export const submitForm = createAsyncThunk(
+    "searchSlice/submitForm",
+    async ({source, destination}) => {
+        try {
+            const res = await axios.get("/api/v1/flight-routes-service/flight_routes", {
+                params: {
+                    src: source,
+                    dest: destination
+                },
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            
+            return res.data;
+        } catch (err) {
+            throw err;
+        }
+    }
+);
+
 const initialState = {
     selected: "one",
     loading: false,
@@ -23,7 +45,10 @@ const initialState = {
     to: "",
     fromResults: [],
     toResults: [],
-    results: []
+    results: [],
+    searchResults: [],
+    searchLoading: false,
+    searchError: null
 };
 
 const searchSlice = createSlice({
@@ -73,6 +98,19 @@ const searchSlice = createSlice({
             .addCase(fetchData.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
+            })
+            .addCase(submitForm.pending, (state, action) => {
+                state.searchLoading = true;
+                state.searchError = null;
+            })
+            .addCase(submitForm.fulfilled, (state,action) => {
+                state.searchLoading = false;
+                state.error = null;
+                state.searchResults = action?.payload;
+            })
+            .addCase(submitForm.rejected, (state, action) => {
+                state.searchLoading = false;
+                state.searchError = action.error.message;
             });
     }
 });
@@ -87,7 +125,7 @@ export const {
     setToResults,
     setResults,
     clearFromResults,
-    clearToResults
+    clearToResults,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

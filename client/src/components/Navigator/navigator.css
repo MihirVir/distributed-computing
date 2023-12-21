@@ -1,0 +1,31 @@
+.navigator {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links {
+    width: 20%;
+    justify-content: space-around;
+    display: flex;  
+}
+
+.links > li {
+    list-style: none;
+    cursor: pointer;
+}
+
+.links li::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: all 200ms ease-in-out;
+}
+
+.links li:hover::after {
+    width: 100%;
+}

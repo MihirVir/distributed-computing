@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import axios from "axios";
+import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import {
   setSelected,
   setStart,
@@ -9,15 +9,17 @@ import {
   setTo,
   setFromResults,
   setToResults,
-  setResults,
   fetchData,
   clearFromResults,
-  clearToResults
+  clearToResults,
+  submitForm
 } from "../../state/search/search_slice";
+
 import "./search.css"
 
 const Search = () => {
   const dispatch = useDispatch();
+  const history = useNavigate(); 
 
   const selected = useSelector((state) => state.search.selected);
   const start = useSelector((state) => state.search.start);
@@ -28,7 +30,7 @@ const Search = () => {
   const fromResults = useSelector((state) => state.search.fromResults);
   const toResults = useSelector((state) => state.search.toResults);
   const results = useSelector((state) => state.search.results);
-  
+
   const handleChange = (e) => {
     dispatch(setSelected(e.target.value));
     e.target.value === "round" ? dispatch(setRound(true)) : dispatch(setRound(false));
@@ -78,6 +80,18 @@ const Search = () => {
     dispatch(clearToResults())
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const source = from;
+      const destination = to;
+      dispatch(submitForm({source, destination}));
+      history("/results")
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className = "airplane-container">
@@ -85,7 +99,7 @@ const Search = () => {
             <img className = "plane-img" src="/airplane.png" alt="" />
         </div>
         <div className="search-bar-container">
-            <form className = "search-form">
+            <form onSubmit = {handleSubmit} className = "search-form">
                 <div className = "radio">
                     <label style = {{marginRight: "1rem"}}>
                       <input style = {{marginRight: '.5rem'}} type="radio" value="one" checked ={selected === "one"} onChange={handleChange}/>

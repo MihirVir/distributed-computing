@@ -1,0 +1,17 @@
+.results-header {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    height: 08vh;
+    background-color: #171717;
+    color: white;
+}
+
+.results-main {
+    width: 100vw;
+    min-height: calc(100vh - 08vh);
+    background-color: #292524;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
