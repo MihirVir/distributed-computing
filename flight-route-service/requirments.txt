@@ -1,0 +1,6 @@
+pip install pyspark
+pip install --no-cache-dir Flask
+pip install findspark
+pip install pymongo
+pip install graphframes
+pip install pycountry
