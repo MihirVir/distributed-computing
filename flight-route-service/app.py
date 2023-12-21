@@ -79,9 +79,8 @@ def get_countries():
 
 
 
-@app.route('/api/v1/flight-routes-service/flight_routes', methods=['POST'])
+@app.route('/api/v1/flight-routes-service/flight_routes', methods=['GET'])
 def flight_routes():
-    print("lol")
 
     request_data = request.get_json()
 
