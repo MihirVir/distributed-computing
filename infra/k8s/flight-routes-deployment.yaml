@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-routes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flight-routes
+  template:
+    metadata:
+      labels:
+        app: flight-routes
+    spec:
+      containers:
+      - name: flight-routes
+        image: navjots20/flight-routes:latest
+        ports:
+        - containerPort: 8000
+        env:
+          - name: MONGO_HOST
+            value: mongo-cluster-ip-service
+          - name: MONGO_PORT
+            value: "27017"
+
