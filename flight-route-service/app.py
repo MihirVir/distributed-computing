@@ -82,10 +82,9 @@ def get_countries():
 @app.route('/api/v1/flight-routes-service/flight_routes', methods=['GET'])
 def flight_routes():
 
-    request_data = request.get_json()
 
-    dest = request_data.get("dest")
-    src = request_data.get("src")
+    dest = request.args.get("dest")
+    src = request.args.get("src")
     
 
     schema = StructType([
