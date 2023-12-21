@@ -68,7 +68,7 @@ trips_data = [
 trip_collection.insert_many(trips_data)
 
 
-@app.route('/countries', methods=['GET'])
+@app.route('/api/v1/flight-routes-service/countries', methods=['GET'])
 def get_countries():
 
     
@@ -79,7 +79,7 @@ def get_countries():
 
 
 
-@app.route('/flight_routes', methods=['POST'])
+@app.route('/api/v1/flight-routes-service/flight_routes', methods=['POST'])
 def flight_routes():
     print("lol")
 

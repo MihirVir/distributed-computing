@@ -15,7 +15,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /?(.*)
+          - path: /api/v1/flight-routes-service/?(.*)
             # UPDATE PATH
             pathType: ImplementationSpecific
             # ADD PATHTYPE
