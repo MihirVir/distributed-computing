@@ -109,7 +109,6 @@ def flight_routes():
     tripGraph = GraphFrame(df, trip_df)
     flight_routes = []
     motifs = tripGraph.find("(a)-[e]->(b); (b)-[e2]->(c)").filter("a.id == '{}' and c.id == '{}'".format(src,dest))
-    motifs.show()
     for row in motifs.rdd.collect():
         print(row.a['id'])
         print(row.e['flight_no'])
@@ -118,6 +117,13 @@ def flight_routes():
                                "flights":[{"flight_no" : row.e['flight_no'],"airline": row.e['flight_no']},{"flight_no" : row.e2['flight_no'],"airline": row.e2['flight_no']}],
                                "price" : int(row.e["price"]) + int(row.e2["price"]), "type" : "layover"        
                                })
+    motifs = tripGraph.find("(a)-[e]->(b)").filter("a.id == '{}' and b.id == '{}'".format(src,dest))
+    for row in motifs.rdd.collect():
+
+        flight_routes.append({"src":{"id":row.a['id'],"name":row.a['name']}, "dest":{"id":row.b['id'],"name":row.b['name']},
+                               "flights":[{"flight_no" : row.e['flight_no'],"airline": row.e['flight_no']}],
+                               "price" : int(row.e["price"]), "type" : "direct"        
+                               })   
     return jsonify(flight_routes)
 
 
