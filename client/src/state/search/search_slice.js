@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+/**
+ * contains all the search data 
+ * refer to store for details
+ */
 export const fetchData = createAsyncThunk(
     "searchSlice/fetchData",
     async () => {
@@ -48,7 +51,9 @@ const initialState = {
     results: [],
     searchResults: [],
     searchLoading: false,
-    searchError: null
+    searchError: null,
+    fromResultsActive: false,
+    toResultsActive: false
 };
 
 const searchSlice = createSlice({
@@ -83,6 +88,12 @@ const searchSlice = createSlice({
         clearToResults(state, action) {
             state.toResults = []
         },
+        setFromResultsActive(state, action) {
+            state.fromResultsActive = action.payload;
+        },
+        setToResultsActive(state, action) {
+          state.toResultsActive = action.payload;  
+        }
     },
     extraReducers(builder) {
         builder
@@ -126,6 +137,8 @@ export const {
     setResults,
     clearFromResults,
     clearToResults,
+    setFromResultsActive,
+    setToResultsActive
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

@@ -1,10 +1,12 @@
 .nav {
     display: flex;
-    width: 98%;
+    width: 95%;
     justify-content: space-between;
     align-items: center;
     height: 8vh;
     color: white;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
 .logo {
