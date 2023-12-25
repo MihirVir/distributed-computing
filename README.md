@@ -9,7 +9,18 @@ Make sure you have the following installed:
 - Node.js
 - npm (usually comes with Node.js installation)
 - Git
+- Skaffold
 
+# Method 1
+# download skaffold using homebrew
+use this command to run the application
+```bash
+skaffold dev
+```
+You might see some errors when you try runnning the above command.
+Just spam this command to make it work.
+
+# Method 2
 ### To navigate to the project directory, use:
 
 ```bash
@@ -58,8 +69,6 @@ kubectl apply -f client-depl.yaml
 
 
 ### using minikube
-
-get the minikube ip
 ```bash
 minikube service client-service
 ```
