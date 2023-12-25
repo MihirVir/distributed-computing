@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import searchReducer from "./search/search_slice";
-
+import filterReducer from "./filter/filter_slice";
 /*
     used for global state management
     
@@ -13,6 +13,7 @@ import searchReducer from "./search/search_slice";
 */
 export const store = configureStore({
     reducer: {
-        search: searchReducer
+        search: searchReducer,
+        filter: filterReducer
     }
 });

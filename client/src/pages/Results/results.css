@@ -3,15 +3,15 @@
     display: flex;
     justify-content: center;
     height: 08vh;
-    background-color: #171717;
+    background-color: #05203C;
     color: white;
 }
 
 .results-main {
     width: 100vw;
     min-height: calc(100vh - 08vh);
-    background-color: #292524;
-    color: white;
+    color: black;
+    background-color: rgb(238,241,242);
     display: flex;
     justify-content: center;
 }

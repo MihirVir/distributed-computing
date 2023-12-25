@@ -18,7 +18,7 @@ export const fetchData = createAsyncThunk(
 
 export const submitForm = createAsyncThunk(
     "searchSlice/submitForm",
-    async ({source, destination}) => {
+    async ({source, destination, history}) => {
         try {
             const res = await axios.get("/api/v1/flight-routes-service/flight_routes", {
                 params: {
@@ -29,7 +29,7 @@ export const submitForm = createAsyncThunk(
                     "Content-Type": "application/json"
                 }
             });
-            
+            history("/results");   
             return res.data;
         } catch (err) {
             throw err;
@@ -53,7 +53,7 @@ const initialState = {
     searchLoading: false,
     searchError: null,
     fromResultsActive: false,
-    toResultsActive: false
+    toResultsActive: false,
 };
 
 const searchSlice = createSlice({

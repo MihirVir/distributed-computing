@@ -1,8 +1,12 @@
 import React from 'react'
-
+import "./loading.css"
 const Loading = () => {
   return (
-    <div>Loading</div>
+    <div className="overlay">
+      <div className="loader">
+        <p>Loading</p>
+      </div>
+    </div>
   )
 }
 

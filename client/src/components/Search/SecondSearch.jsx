@@ -17,6 +17,7 @@ import {
     setFromResultsActive, 
     setToResultsActive
   } from "../../state/search/search_slice";
+import Loading from '../Loading/Loading';
 const SecondSearch = () => {
     const history = useNavigate();
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const SecondSearch = () => {
     const results = useSelector((state) => state.search.results);
     const fromResultsActive = useSelector((state) => state.search.fromResultsActive);
     const toResultsActive = useSelector((state) => state.search.toResultsActive);
-
+    const searchLoading = useSelector((state) => state.search.searchLoading);
     useEffect(() => {
         dispatch(fetchData());
     },[])
@@ -89,9 +90,8 @@ const SecondSearch = () => {
         try {
             const source = from;
             const destination = to;
-            dispatch(submitForm({source, destination}))
+            dispatch(submitForm({source, destination, history}))  
 
-            history("/results")
         } catch (err) {
             console.log(err);
         }
@@ -99,6 +99,7 @@ const SecondSearch = () => {
 
     return (
         <>
+            {searchLoading && <Loading />}
             <div className = "second-search-container">
                 <h1>Thousands of cheap flights. One simple search</h1>
                 <div className = "search-options">
