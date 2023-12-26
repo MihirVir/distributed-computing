@@ -20,20 +20,16 @@ const ResultBar = (props) => {
   return (
     <div className="result-bar-container">
         <div className="search-information">
-          <FaSearch style = {{fontSize: "1.2rem"}} />
-          <div className="source">
-            <span style = {{fontSize: "1.2rem"}}>{searchResults[0].src.name}</span>
-            <span style = {{fontSize: "1.2rem"}}>[{searchResults[0].src.id}]</span>
+          <div className="search-container">
+            <div className="source">
+              <span style = {{fontSize: "1rem"}}>{searchResults[0].src.name}</span>
+            </div>
+            <span style={{fontSize: "1rem"}}>-</span>
+            <div className="destination">
+              <span style = {{fontSize: "1rem"}}>{searchResults[0].dest.name}</span>
+            </div>
           </div>
-          <span style={{fontSize: "1rem"}}>-</span>
-          <div className="destination">
-            <span style = {{fontSize: "1.2rem"}}>{searchResults[0].dest.name}</span>
-            <span style = {{fontSize: "1.2rem"}}>[{searchResults[0].dest.id}]</span>
-          </div>
-        </div>
-        <div className="search-filter-container">
-          <IoFilterSharp style = {{fontSize: "1.2rem"}}/> 
-          <div className = "filter-list">
+          <div className="filter-container">
             <select onChange = {handleOptionSelected} className = "custom-select" id="options">
               <option value="">Sort by</option>
               <option value="ascending">Price: Low - High</option>

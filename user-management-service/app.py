@@ -2,22 +2,24 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 import bcrypt
+import datetime
+import jwt
 import os
 app = Flask(__name__)
 
+secret = os.environ["JWT_SECRET"]
 mongo_uri = os.environ["MONGO_HOST"]
 mongo_port = int(os.environ["MONGO_PORT"])
+
 database_name = "mydatabase"
 user_collection = "users"
 
 try:
     client = MongoClient(mongo_uri, mongo_port)
     db = client[database_name]
-    collection = client[user_collection]
-    print("Connected to Mongo")
+    collection = db[user_collection]
 except ConnectionFailure:
-    print("Connection Failure")
-
+    print("OOPS can't connect to mongoDB")
 
 user = []
 
@@ -28,32 +30,99 @@ def hello_user():
 @app.route("/api/v1/user/register", methods=["POST"])
 def register_user():
     if request.method == "POST":
-        user_data = request.get_json()
+        try:
 
-        name = user_data.get("name")
-        email = user_data.get("email")
-        password = user_data.get("password")
-        
-        hashed_password = bcrypt.hashpw(password.encode("UTF-8"), bcrypt.gensalt())
+            user_data = request.get_json()
 
-        user.append({
-            'name': name,
-            'email': email,
-            'password': hashed_password.decode("UTF-8")
-        })
+            name = user_data.get("name")
+            email = user_data.get("email")
+            password = user_data.get("password")
 
-        print(f"{name} {email} {password} {hashed_password}")
-        return jsonify({
-            'message': "User was successfully created"
-        })
+            if name and email and password:
+                existing_user = collection.find_one({ "email": email })
+                if existing_user:
+                    return jsonify({
+                        "message": "User already exists"
+                    })
+                
+                # algorithm used HS256
+                hashed_password = bcrypt.hashpw(password.encode("UTF-8"), bcrypt.gensalt())
+
+                # by default active is false once user register 
+                # it will be prompted to click on a link to make it active 
+                # link will be provided via email 
+                user = {
+                    "name": name,
+                    "email": email,
+                    "password": hashed_password.decode("UTF-8"),
+                    "active": False
+                }
+
+                saved_user = collection.insert_one(user)
+                
+                token = jwt.encode({"email": email, "name": name, "active": user["active"],"exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10)}, secret)
+
+                user.pop("password")
+                user["_id"] = str(saved_user.inserted_id)
+                
+                return jsonify({
+                    "message": "User Successfully created",
+                    "user": user,
+                    "link": f"localhost/api/v1/user/active?token={token}"
+                })
+            
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
 @app.route("/api/v1/user/login")
 def login_user():
     return "Login User"
 
+@app.route("/api/v1/user/delete", methods = ["DELETE"])
+def delete_all_users():
+    deleted_users = collection.delete_many({})
+    return jsonify({
+        "message": "users deleted"
+    })
+
 @app.route("/api/v1/user/current-user", methods = ["GET"])
 def get_current_user():
     return jsonify(user)
 
+@app.route("/api/v1/user/active", methods = ["POST"])
+def user_active():
+    token = request.args.get("token")
+    if token:
+        try:
+            decoded_token = jwt.decode(token, secret, algorithms=["HS256"])
+
+            if "email" in decoded_token:
+                email = decoded_token["email"]
+
+                exisitng_user = collection.find_one({ "email": email })
+
+                if exisitng_user["active"] == True:
+                    return jsonify({
+                        "message": "User is already active"
+                    })
+
+                updated_user = collection.update_one({  "email": email }, { "$set": { "active": True }})
+                
+                updated_user = collection.find_one({"email": email})
+
+                if updated_user:
+                    updated_user.pop("password")
+                    updated_user["_id"] = str(updated_user["_id"])
+                    return jsonify({
+                        "message": "User is now active",
+                        "updated_user": updated_user
+                    })
+                return jsonify({"message": "User not found"}), 404
+        except jwt.ExpiredSignatureError:
+            return jsonify({ "message": "Token Expired" }), 401
+        except jwt.InvalidTokenError:
+            return jsonify({ "message": "Invalid Token is Provided" }), 401
+    else:
+        return jsonify({ "message": "No Token Provided"}), 400
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -22,3 +22,5 @@ spec:
               value: mongo-cluster-ip-service
             - name: MONGO_PORT
               value: "27017"
+            - name: JWT_SECRET
+              value: "123TEST"
