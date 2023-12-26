@@ -38,7 +38,7 @@ const Popular = () => {
                 return (
                     <>
                     <div key = {item.name} className="card">
-                        <img className = "card-image" src={item.src} alt="" />
+                        <img loading = "lazy" className = "card-image" src={item.src} alt="" />
                         <div>
                             <p className = "location-name">{item.name}</p>
                             <span className = "tags">flights</span>

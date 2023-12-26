@@ -25,6 +25,13 @@ spec:
                 name: flight-routes-cluster-ip-service
                 port:
                   number: 8000
+          - path: /api/v1/user/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: user-srv
+                port:
+                  number: 5000
           # if above paths doesn't matches request is transfered
           # to client.
           - path: /?(.*)

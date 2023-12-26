@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import React,{useEffect} from 'react'
 import "./secondsearch.css"
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,9 @@ import {
     setToResultsActive
   } from "../../state/search/search_slice";
 import Loading from '../Loading/Loading';
-const SecondSearch = () => {
+
+// preventing unnecessary re renders when the props are same
+const SecondSearch = React.memo(() => {
     const history = useNavigate();
     const dispatch = useDispatch();
     const selected = useSelector((state) => state.search.selected);
@@ -154,6 +156,6 @@ const SecondSearch = () => {
             </div>
         </>
     )
-}
+})
 
 export default SecondSearch

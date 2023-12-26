@@ -38,6 +38,7 @@
     width: 18%;
     border-top-left-radius: .4rem;
     border-bottom-left-radius: .4rem;
+    margin-top: .5rem;
     background-color: white;
     position: relative;
     height: 9vh;
@@ -95,8 +96,10 @@ input[type="date"] {
 
 .search-btn {
     width: 18%;
+    margin-top: .5rem;
     border-radius: .4rem;
     border: none;
+    height: 9vh;
     outline: none;
     background-color: #2563eb;  
     color: white;

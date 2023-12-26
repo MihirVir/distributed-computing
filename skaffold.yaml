@@ -16,3 +16,11 @@ build:
         manual:
           - src: '/**/*.js'
             dest: .
+    - image: mihirvir10/user
+      context: user-management-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "/*.py"
+            dest: .
