@@ -1,0 +1,122 @@
+.card-wrapper {
+    width: 40%;
+}
+.new-card-container {
+    background-color: rgb(0, 61, 136);
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, .2);
+    color: white;
+    border-radius: .75rem;
+    height: 17%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+}
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 80%;
+}
+.airlines-logo {
+    height: 50%;
+    width: 50%;
+}
+.some-cool-information {
+    display: flex;
+    width: 12%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;    
+}
+.time {
+    font-size: 24px;
+    text-align: end;
+}
+.source-id {
+    font-size: 16px;
+    text-align: end;
+}
+.liner {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.line {
+    width: 100%;
+    height: 2px;
+    position: relative;
+    background-color: rgb(184, 184, 184);
+}
+
+.air-img {
+    height: 100%;
+    width: 4%;
+    margin-left: -16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.svg-plane {
+    height: 50%;
+    width: 50%;
+    color: rgb(184, 184, 184);
+}
+
+.some-cool-information.destination {
+    align-items: flex-start;
+    margin-left: -5px;
+}
+.pricing-information {
+    height: 100%;
+    width: 24.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    border-left: 1px solid rgba(5, 5, 5, .4);
+}
+.deals {
+    font-size: 12px;
+    color: rgb(184, 184, 184);
+}
+.price {
+    font-size: 20px;
+}
+.add-to-cart-btn {
+    padding: .5em;
+    width: 70%;
+    border: none;
+    outline: none;
+    background-color: #05203C;
+    color: white;
+    border-radius: .5em;
+    cursor: pointer;
+}
+
+.red-dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    position: absolute;
+    top: -2px;
+    background-color: red;
+    left: 50%;
+}
+.info-imp {
+    position: absolute;
+    top: 5px;
+    font-size: .7rem;
+    width: 100%;
+    text-align: center;
+}
+.info-imp > span {
+    color: red;
+    margin-right: 2px;
+}

@@ -8,9 +8,10 @@
 }
 
 .results-main {
-    width: 80vw;
+    width: 100vw;
     min-height: calc(100vh - 08vh);
     color: black;
     display: flex;
-    justify-content: flex-end;
+    gap: 1rem;
+    justify-content: flex-start;
 }

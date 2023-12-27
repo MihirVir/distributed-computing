@@ -1,8 +1,9 @@
 import React from 'react';
 import Navigator from '../../components/Navigator/Navigator';
-import "./results.css";
+import { useSelector } from 'react-redux';
 import ResultBar from '../../components/ResultBar/ResultBar';
-
+import CardResult from '../../components/CardResult/CardResult';
+import "./results.css";
 // searchResults: [
 //   {
 //     dest: {
@@ -32,7 +33,7 @@ import ResultBar from '../../components/ResultBar/ResultBar';
 //   }
 // ],
 const Results = () => {
-  // const searchResults = useSelector((state) => state.search.searchResults);
+  const searchResults = useSelector((state) => state.search.searchResults);
   
   return (
     <>
@@ -40,7 +41,7 @@ const Results = () => {
             <Navigator />
         </header>
         <main className = "results-main">
-          <ResultBar />
+          <ResultBar searchResults = {searchResults}/>
           {/* {
             searchResults.length > 0 ? searchResults.map((item, idx) => {
               return (
@@ -54,6 +55,7 @@ const Results = () => {
               </>
             )
           } */}
+          <CardResult searchResults = {searchResults}/>
         </main>
     </>
   )
