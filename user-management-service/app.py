@@ -118,11 +118,14 @@ def user_active():
                         "updated_user": updated_user
                     })
                 return jsonify({"message": "User not found"}), 404
+            
         except jwt.ExpiredSignatureError:
             return jsonify({ "message": "Token Expired" }), 401
+        
         except jwt.InvalidTokenError:
             return jsonify({ "message": "Invalid Token is Provided" }), 401
     else:
         return jsonify({ "message": "No Token Provided"}), 400
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)

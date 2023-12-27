@@ -1,9 +1,8 @@
 import React from 'react';
 import Navigator from '../../components/Navigator/Navigator';
 import "./results.css";
-import { FaSearch } from "react-icons/fa";
-import { useSelector } from 'react-redux';
 import ResultBar from '../../components/ResultBar/ResultBar';
+
 // searchResults: [
 //   {
 //     dest: {
@@ -33,8 +32,7 @@ import ResultBar from '../../components/ResultBar/ResultBar';
 //   }
 // ],
 const Results = () => {
-  const searchResults = useSelector((state) => state.search.searchResults);
-  console.log(searchResults);
+  // const searchResults = useSelector((state) => state.search.searchResults);
   
   return (
     <>
@@ -42,7 +40,7 @@ const Results = () => {
             <Navigator />
         </header>
         <main className = "results-main">
-          <ResultBar searchResults = {searchResults}/>
+          <ResultBar />
           {/* {
             searchResults.length > 0 ? searchResults.map((item, idx) => {
               return (
