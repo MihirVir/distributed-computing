@@ -12,7 +12,7 @@ findspark.init()
 
 from pyspark.sql import SparkSession
 from pyspark import SparkConf
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
 from graphframes import GraphFrame
 
 conf = SparkConf()
@@ -54,14 +54,32 @@ trips_data = [
         "dest": "IRL",
         "flight_no": "lol1",  
         "airline" : "emirates",
-        "price": 500
+        "price": 500,
+        "rating" : 4.0
     },
     {
         "src": "IRL",
         "dest": "CHN",
-        "flight_no": "lol2",
+        "flight_no": "lol3",
         "airline": "emirates",    
-        "price" : 200
+        "price" : 200,
+        "rating" : 4.5
+    },
+    {
+        "src": "IRL",
+        "dest": "CHN",
+        "flight_no": "RNDB",
+        "airline": "eithad",    
+        "price" : 400,
+        "rating" : 2.2
+    },
+    {
+        "src": "IND",
+        "dest": "CHN",
+        "flight_no": "ZRQN",
+        "airline": "emirates",    
+        "price" : 200,
+        "rating" : 3.6
     }
 ]
 
@@ -100,6 +118,7 @@ def flight_routes():
         StructField("flight_no", StringType(), True),
         StructField("airline", StringType(), True),
         StructField("price", IntegerType(), True),
+        StructField("rating", DoubleType(), True),
     ])
 
     data = [tuple(doc.values()) for doc in trip_collection.find({},{"_id":0})]
@@ -113,16 +132,16 @@ def flight_routes():
         print(row.e['flight_no'])
 
         flight_routes.append({"src":{"id":row.a['id'],"name":row.a['name']}, "layover":{"id":row.b['id'],"name":row.b['name']}, "dest":{"id":row.c['id'],"name":row.c['name']},
-                               "flights":[{"flight_no" : row.e['flight_no'],"airline": row.e['flight_no']},{"flight_no" : row.e2['flight_no'],"airline": row.e2['flight_no']}],
+                               "flights":[{"flight_no" : row.e['flight_no'],"airline": row.e['flight_no'],"rating": row.e['rating']},{"flight_no" : row.e2['flight_no'],"airline": row.e2['flight_no'],"rating": row.e2['rating']}],
                                "price" : int(row.e["price"]) + int(row.e2["price"]), "type" : "layover"        
                                })
     motifs = tripGraph.find("(a)-[e]->(b)").filter("a.id == '{}' and b.id == '{}'".format(src,dest))
     for row in motifs.rdd.collect():
 
         flight_routes.append({"src":{"id":row.a['id'],"name":row.a['name']}, "dest":{"id":row.b['id'],"name":row.b['name']},
-                               "flights":[{"flight_no" : row.e['flight_no'],"airline": row.e['flight_no']}],
+                               "flights":[{"flight_no" : row.e['flight_no'],"airline": row.e['flight_no'],"rating": row.e['rating']}],
                                "price" : int(row.e["price"]), "type" : "direct"        
-                               })   
+                               })       
     return jsonify(flight_routes)
 
 

@@ -15,6 +15,7 @@ spec:
       containers:
       - name: flight-routes
         image: navjots20/flight-routes:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8000
         env:
