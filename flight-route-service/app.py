@@ -4,6 +4,8 @@ import os
 import random
 import pycountry
 import findspark
+import threading
+import time
 
 app = Flask(__name__)
 
@@ -86,6 +88,29 @@ trips_data = [
 trip_collection.insert_many(trips_data)
 
 
+def update_flight_rating(request_data):
+    time.sleep(1)
+    rating = request_data.get("rating")
+    flight_no = request_data.get("flight_no")
+    
+    flight = trip_collection.find_one({"flight_no":flight_no})
+    rating_count = flight.get("rating_count",0)
+    new_rating = round((flight.get("rating")*rating_count + rating)/(rating_count+1),1)
+    trip_collection.update_one({"flight_no":flight_no},{"$set":{"rating":new_rating,"rating_count":rating_count+1}})
+
+
+@app.route('/api/v1/flight-routes-service/flight-rating', methods=['PUT'])
+def update_flight_rating_api():
+
+    
+    request_data = request.get_json()
+    my_thread = threading.Thread(target=update_flight_rating,args=(request_data,))
+    my_thread.start()
+
+    return jsonify({"result":"successfully updated"})
+
+
+
 @app.route('/api/v1/flight-routes-service/countries', methods=['GET'])
 def get_countries():
 
@@ -121,7 +146,7 @@ def flight_routes():
         StructField("rating", DoubleType(), True),
     ])
 
-    data = [tuple(doc.values()) for doc in trip_collection.find({},{"_id":0})]
+    data = [tuple(doc.values()) for doc in trip_collection.find({},{"_id":0,"rating_count":0})]
     trip_df = spark.createDataFrame(data, schema=schema)
 
     tripGraph = GraphFrame(df, trip_df)
