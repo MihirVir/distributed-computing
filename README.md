@@ -1,6 +1,6 @@
-## Installation of Client
+# Installation Guide
 
-Follow these steps to get the app up and running on your local machine:
+Follow these steps to get the app up and running on machine:
 
 ## Prerequisites
 
