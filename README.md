@@ -11,7 +11,7 @@ Make sure you have the following installed:
 - Skaffold [https://skaffold.dev/docs/install/] (Mac needs homebrew)
 - docker desktop kubernetes [Settings -> Kubernetes -> Apply and Restart]
 
-## Use the following command to start the command
+## Use the following command to run the application
 
 ```bash
 skaffold dev
