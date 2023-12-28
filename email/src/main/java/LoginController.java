@@ -18,7 +18,7 @@ public class LoginController {
     SendCodeService sendCodeService;
 
     @ApiOperation(value = "发送邮箱验证码", tags = "发送邮箱验证码")
-    @PostMapping("/phone")
+    @PostMapping("/email")
     public void sendEMail(@RequestParam("param1") String email) throws MessagingException {
         String code = Mail.achieveCode();
         sendCodeService.sendEMail(email, code);
