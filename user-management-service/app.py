@@ -130,6 +130,30 @@ def delete_all_users():
 
 @app.route("/api/v1/user/current-user", methods = ["GET"])
 def get_current_user():
+    token = request.cookies.get("token")
+
+    if not token:
+        return jsonify({
+            "message": "No Valid Token Found"
+        }), 401
+
+    decoded_token = jwt.decode(token, secret, algorithms=["HS256"])
+
+    if "email" not in decoded_token:
+        return jsonify({
+            "message": "Invalid Token Provided"
+        }), 401
+
+    email = decoded_token["email"]
+    user =  collection.find_one({ "email": email})
+
+    if not user:
+        return jsonify({
+            "message": "Something Went Wrong"
+        }), 401
+
+    user.pop("password")
+    user["_id"] = str(user["_id"])
     return jsonify(user)
 
 @app.route("/api/v1/user/active", methods = ["POST"])

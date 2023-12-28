@@ -1,0 +1,47 @@
+.auth-card-comp {
+    width: 25%;
+    background-color: white;
+    height: 45%;
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.2);
+    gap: 1rem;
+}
+.register-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.auth-text {
+    padding: .75rem;
+    outline: none;
+    border: 2px solid black;
+}
+.pass {
+    position: relative;
+    background-color: antiquewhite;
+}
+.pass > input {
+    width: 100%;
+}
+.eye-icon {
+    position: absolute;
+    cursor: pointer;
+    right: 1rem;
+    top: 30%;
+}
+
+.register-btn {
+    padding: .75rem;
+    border: 2px solid black;
+    background-color: transparent;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+.register-btn:hover {
+    background-color: black;
+    color: white;
+}

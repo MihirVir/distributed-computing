@@ -7,7 +7,12 @@ import {
 import "./app.css"
 import Home from './pages/Home/Home'
 import Results from './pages/Results/Results'
+import Register from './pages/Register/Register'
+import Login from './pages/Login/Login'
 
+/*
+  creating multi paged application with react router dom 
+ */
 const App = () => {
   return (
     <>
@@ -15,6 +20,8 @@ const App = () => {
             <Routes>
                 <Route exact path = "/" element = {<Home/>}/>
                 <Route exact path = "/results" element = {<Results />} />
+                <Route exact path = "/register" element = {<Register />} />
+                <Route exact path = "/login" element = {<Login />} /> 
             </Routes>
         </BrowserRouter>
     </>
