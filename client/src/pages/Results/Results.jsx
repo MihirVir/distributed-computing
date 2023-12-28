@@ -41,21 +41,10 @@ const Results = () => {
             <Navigator />
         </header>
         <main className = "results-main">
-          <ResultBar searchResults = {searchResults}/>
-          {/* {
-            searchResults.length > 0 ? searchResults.map((item, idx) => {
-              return (
-                <>
-                  <p>{item.src.id}</p> 
-                </>
-              )
-            }) : (
-              <>
-                <p>No Results</p>
-              </>
-            )
-          } */}
-          <CardResult searchResults = {searchResults}/>
+          <div className= "result-main-wrapper" >
+            <ResultBar searchResults = {searchResults}/>
+            <CardResult searchResults = {searchResults}/>
+          </div>
         </main>
     </>
   )

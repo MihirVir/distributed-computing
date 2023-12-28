@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, make_response, jsonify
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 import bcrypt
@@ -64,19 +64,62 @@ def register_user():
 
                 user.pop("password")
                 user["_id"] = str(saved_user.inserted_id)
-                
-                return jsonify({
+
+                response = make_response(jsonify({
                     "message": "User Successfully created",
                     "user": user,
                     "link": f"localhost/api/v1/user/active?token={token}"
-                })
+                }))
+                
+                return response
             
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-@app.route("/api/v1/user/login")
+@app.route("/api/v1/user/login", methods = ["POST"])
 def login_user():
-    return "Login User"
+    if request.method == "POST":
+        try:
+            user_details = request.get_json()
+
+            email = user_details.get("email")    
+            password = user_details.get("password")
+
+            if not email or not password:
+                return jsonify({
+                    "message": "email or password is not provided"
+                })
+
+            user = collection.find_one({ "email": email })
+
+            if not user:
+                return jsonify({
+                    "message": "User not found"
+                })
+        
+            if user.get("active") == False:
+                return jsonify({
+                    "message": "Please click on the verfication link provided in the email"
+                })
+            
+            stored_password = user.get("password")
+            is_matching_pass = bcrypt.checkpw(password.encode("UTF-8"), stored_password.encode("UTF-8"))
+
+            if not is_matching_pass:
+                return jsonify({
+                    "message": "invalid username or password"
+                })
+            token = jwt.encode({"email": email, "active": user["active"],"exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10)}, secret)
+            
+            response = make_response(jsonify({
+                "message": "user logged in"
+            }))
+
+            response.set_cookie("token", token, max_age=36000, httponly=True)
+
+            return response
+        except Exception as e:
+            print(str(e))
 
 @app.route("/api/v1/user/delete", methods = ["DELETE"])
 def delete_all_users():

@@ -1,6 +1,6 @@
 .result-bar-container {
     margin-top: 1.5rem;
-    width: 16%;
+    width: 18%;
     height: max-content;
     display: flex;
     color: white;
@@ -10,7 +10,10 @@
     justify-content: space-between;
 }
 .search-information {
-    padding: 2rem;
+    padding-bottom: .5rem;
+    padding-top: .5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
     border-radius: .5rem;
     width: 100%;
     height: 15vh;
