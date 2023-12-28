@@ -97,10 +97,10 @@ def login_user():
                     "message": "User not found"
                 })
         
-            if user.get("active") == False:
-                return jsonify({
-                    "message": "Please click on the verfication link provided in the email"
-                })
+            # if user.get("active") == False:
+            #     return jsonify({
+            #         "message": "Please click on the verfication link provided in the email"
+            #     })
             
             stored_password = user.get("password")
             is_matching_pass = bcrypt.checkpw(password.encode("UTF-8"), stored_password.encode("UTF-8"))
@@ -109,7 +109,7 @@ def login_user():
                 return jsonify({
                     "message": "invalid username or password"
                 })
-            token = jwt.encode({"email": email, "active": user["active"],"exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10)}, secret)
+            token = jwt.encode({"email": email, "active": user["active"],"exp": datetime.datetime.utcnow() + datetime.timedelta(hours=10)}, secret)
             
             response = make_response(jsonify({
                 "message": "user logged in"

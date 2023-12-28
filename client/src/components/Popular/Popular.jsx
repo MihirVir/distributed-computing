@@ -37,7 +37,7 @@ const Popular = () => {
             {flight_data.map((item, idx) => {
                 return (
                     <>
-                    <div key = {item.name} className="card">
+                    <div key = {idx} className="card">
                         <img loading = "lazy" className = "card-image" src={item.src} alt="" />
                         <div>
                             <p className = "location-name">{item.name}</p>

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
 import searchReducer from "./search/search_slice";
 import filterReducer from "./filter/filter_slice";
+import userReducer from "./user/user_slice";
 /*
     used for global state management
     
@@ -14,6 +15,7 @@ import filterReducer from "./filter/filter_slice";
 export const store = configureStore({
     reducer: {
         search: searchReducer,
-        filter: filterReducer
+        filter: filterReducer,
+        user: userReducer
     }
 });

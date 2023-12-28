@@ -35,6 +35,7 @@ const SecondSearch = React.memo(() => {
     const fromResultsActive = useSelector((state) => state.search.fromResultsActive);
     const toResultsActive = useSelector((state) => state.search.toResultsActive);
     const searchLoading = useSelector((state) => state.search.searchLoading);
+    const id = useSelector((state) => state.user.id);
     useEffect(() => {
         dispatch(fetchData());
     },[])
@@ -92,7 +93,8 @@ const SecondSearch = React.memo(() => {
         try {
             const source = from;
             const destination = to;
-            dispatch(submitForm({source, destination, history}))  
+            console.log("id is this = " + id);
+            dispatch(submitForm({id, source, destination, history}))
 
         } catch (err) {
             console.log(err);

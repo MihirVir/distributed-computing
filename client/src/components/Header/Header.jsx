@@ -1,7 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import "./header.css"
 
-const Header = () => {
+const Header = (props) => {
+    const name = useSelector((state) => state.user.name)
+    const email = useSelector((state) => state.user.email)
+    const {user} = props;
     return (
         <>
             <nav className = "nav">
@@ -9,8 +13,16 @@ const Header = () => {
                     BOOKER
                 </div>
                 <ul className = "nav-links">
-                    <li>Signup</li>
-                    <li>Signin</li>
+                    {user ? (
+                        <>
+                            <li>{name}</li> 
+                        </>
+                    ) : (
+                        <>
+                            <li>Register</li>
+                            <li>Login</li>
+                        </>
+                    )}
                 </ul>
             </nav>
         </>
