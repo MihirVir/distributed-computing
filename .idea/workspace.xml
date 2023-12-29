@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BeansEndpointTabSettings">
+    <option name="showFiles" value="false" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fce5da8a-caab-4b5f-aee2-3de8bc2ecb58" name="Changes" comment="add the controller and service">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/email/src/main/java/Main/EmailApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/email/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/src/main/java/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/sendEmail/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/src/main/java/Mail.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/sendEmail/Mail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/src/main/java/SendCodeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/sendEmail/SendCodeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/src/main/java/SendCodeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/sendEmail/SendCodeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/target/classes/Mail$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/target/classes/Mail.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="AnnotationType" />
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="spring-beans.schema" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2a7xCUgwLsCncm32lob9jlp10Kp" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-20&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Game/git/distributed-computing/email/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.13967973&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.29089028&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0c83f57c786a0b4a39efab23731c7ebc&quot;
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Game\git\distributed-computing\email\src" />
+      <recent name="D:\Game\git\distributed-computing" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Game\git\distributed-computing\email\src\main\java" />
+      <recent name="D:\Game\git\distributed-computing\email\controller" />
+      <recent name="D:\Game\git\distributed-computing\email\untitled\src\main\java" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.EmailApplication">
+    <configuration name="MailUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="utils.MailUtil" />
+      <module name="untitled" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmailApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="email" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="Main.EmailApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="emailApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="email" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="emailApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.EmailApplication" />
+        <item itemvalue="Spring Boot.emailApplication" />
+        <item itemvalue="Application.MailUtil" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringBeansView">
+    <option name="showImplicitBeans" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fce5da8a-caab-4b5f-aee2-3de8bc2ecb58" name="Changes" comment="" />
+      <created>1703683290964</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1703683290964</updated>
+      <workItem from="1703683297554" duration="2303000" />
+      <workItem from="1703704286704" duration="9285000" />
+      <workItem from="1703780660020" duration="6273000" />
+      <workItem from="1703795047965" duration="334000" />
+      <workItem from="1703795431144" duration="3368000" />
+    </task>
+    <task id="LOCAL-00001" summary="add the controller and service">
+      <created>1703782419594</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1703782419594</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add the controller and service">
+      <created>1703782525715</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1703782525715</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add the controller and service" />
+    <option name="LAST_COMMIT_MESSAGE" value="add the controller and service" />
+  </component>
+</project>
