@@ -9,10 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fce5da8a-caab-4b5f-aee2-3de8bc2ecb58" name="Changes" comment="email post at 8081">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/Mail.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/Mail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/SendCodeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/SendCodeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/SendCodeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/SendCodeServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
