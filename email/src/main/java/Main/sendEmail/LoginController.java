@@ -20,7 +20,7 @@ public class LoginController {
     @Autowired
     SendCodeService sendCodeService;
 
-    @ApiOperation(value = "发送邮箱验证码", tags = "发送邮箱验证码")
+    @ApiOperation(value = "Send email verification code", tags = "Send email verification code")
     @PostMapping("/email")
     public String sendEMail(@RequestParam("param1") String email) {
         String code = Mail.achieveCode();

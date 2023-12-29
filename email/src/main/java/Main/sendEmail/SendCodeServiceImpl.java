@@ -25,9 +25,10 @@ public class SendCodeServiceImpl implements SendCodeService {
     @Override
     public void sendEMail(String email, String code) throws MessagingException {
         // 1. 向用户发送验证码
+        //Send verify code to the user
         Mail.sendTestMail(email, code);
 
-        // 2. 将验证码缓存到redis，TTL设置为2分钟
+        // 2. Cache verify code to redis, TTL set to 2 minutes
         redisTemplate.opsForValue().set(email, code, CODE_TTL, TimeUnit.SECONDS);
     }
 

@@ -20,13 +20,14 @@ import javax.mail.internet.MimeMessage;
 public class Mail {
     public static void main(String[] args) throws MessagingException {
         //可以在这里直接测试方法，填自己的邮箱即可
+        //we can test the method directly here, just fill in your own email
         sendTestMail("yilinzhang0731@gmail.com", new Mail().achieveCode());
     }
 
     /**
      * 发送邮件
-     * @param email 收件邮箱号
-     * @param code  验证码
+     * @param email 收件邮箱号 //recipient's email
+     * @param code  验证码 //verification code
      * @throws MessagingException
      */
     public static void sendTestMail(String email, String code) throws MessagingException {

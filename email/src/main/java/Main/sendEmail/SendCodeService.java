@@ -17,10 +17,10 @@ import java.util.concurrent.TimeUnit;
  */
 public interface SendCodeService {
     /**
-     * 向目标邮箱发送验证码
+     * Send verify code to target mailbox
      *
-     * @param email 目标邮箱
-     * @param code  我们发送的验证码
+     * @param email user email
+     * @param code  verify code we sent
      */
     void sendEMail(String email, String code) throws MessagingException;
 
