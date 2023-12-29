@@ -1,4 +1,4 @@
-package sendEmail;
+package Main.sendEmail;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,7 +10,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * ClassName sendEmail.Mail
+ * ClassName Main.sendEmail.Mail
  * Package PACKAGE_NAME
  * Description:
  *
@@ -18,10 +18,10 @@ import javax.mail.internet.MimeMessage;
  * @Creat: 2023/12/28
  */
 public class Mail {
-//    public static void main(String[] args) throws MessagingException, javax.mail.MessagingException {
-//        //可以在这里直接测试方法，填自己的邮箱即可
-//        sendTestMail("yilinzhang0731@gmail.com", new Mail().achieveCode());
-//    }
+    public static void main(String[] args) throws MessagingException {
+        //可以在这里直接测试方法，填自己的邮箱即可
+        sendTestMail("yilinzhang0731@gmail.com", new Mail().achieveCode());
+    }
 
     /**
      * 发送邮件
@@ -29,7 +29,7 @@ public class Mail {
      * @param code  验证码
      * @throws MessagingException
      */
-    public static void sendTestMail(String email, String code) throws MessagingException, javax.mail.MessagingException {
+    public static void sendTestMail(String email, String code) throws MessagingException {
         // 创建Properties 类用于记录邮箱的一些属性
         // Create Properties class to keep email attributes
         Properties props = new Properties();

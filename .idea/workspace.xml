@@ -7,17 +7,7 @@
     <option name="showFiles" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fce5da8a-caab-4b5f-aee2-3de8bc2ecb58" name="Changes" comment="add the controller and service">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/email/src/main/java/Main/EmailApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/email/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/sendEmail/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/Mail.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/sendEmail/Mail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/SendCodeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/sendEmail/SendCodeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/SendCodeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/sendEmail/SendCodeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/target/classes/Mail$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/target/classes/Mail.class" beforeDir="false" />
-    </list>
+    <list default="true" id="fce5da8a-caab-4b5f-aee2-3de8bc2ecb58" name="Changes" comment="email post at 8081" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
