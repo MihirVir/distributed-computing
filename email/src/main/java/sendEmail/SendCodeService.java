@@ -1,7 +1,9 @@
+package sendEmail;
+
 import javax.mail.MessagingException;
 
 /**
- * ClassName SendCodeService
+ * ClassName sendEmail.SendCodeService
  * Package PACKAGE_NAME
  * Description:
  *
