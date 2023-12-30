@@ -10,7 +10,9 @@ app = Flask(__name__)
 # Set RabbitMQ connection details with environment variables or default values
 rabbitmq_host = os.getenv('RABBITMQ_HOST', 'localhost')
 rabbitmq_port = int(os.getenv('RABBITMQ_PORT', 5672))
-rabbitmq_queue = os.getenv('RABBITMQ_QUEUE', 'flight_info_queue')
+rabbitmq_exchange = 'flight.exchange'
+rabbitmq_queue = 'flight.queue'
+rabbitmq_routing_key = 'flight'
 
 # Establish connection to RabbitMQ
 connection_parameters = pika.ConnectionParameters(host=rabbitmq_host, port=rabbitmq_port)
@@ -18,7 +20,9 @@ connection = pika.BlockingConnection(connection_parameters)
 channel = connection.channel()
 
 # Declare the queue
+channel.exchange_declare(exchange=rabbitmq_exchange, exchange_type='direct')
 channel.queue_declare(queue=rabbitmq_queue)
+channel.queue_bind(queue=rabbitmq_queue, exchange=rabbitmq_exchange, routing_key=rabbitmq_routing_key)
 
 # Read MongoDB host and port from environment variables or use default values
 mongo_host = os.getenv('MONGO_HOST', 'localhost')
@@ -30,7 +34,7 @@ db = client["airline1_db"]
 airline1_collection = db["flights"]
 
 # get all flights' info
-@app.route('/api/v1/airlin11-service/flights', methods=['GET'])
+@app.route('/api/v1/airline1-service/flights', methods=['GET'])
 def get_flights():
     flights = airline1_collection.find({}, {'_id': 0})
     flights_list = list(flights)
@@ -39,7 +43,7 @@ def get_flights():
     return jsonify(flights_list)
 
 # get specific flight info
-@app.route('/api/v1/airlin11-service/flights/<flight_no>', methods=['GET'])
+@app.route('/api/v1/airline1-service/flights/<flight_no>', methods=['GET'])
 def get_flight(flight_no):
     flight = airline1_collection.find_one({"flight_no": flight_no}, {'_id': 0})
     if flight:
@@ -48,7 +52,7 @@ def get_flight(flight_no):
         return "Flight not found", 404
 
 # update price according to the rating of airline
-@app.route('/api/v1/airlin11-service/flights/update-prices', methods=['POST'])
+@app.route('/api/v1/airline1-service/flights/update-prices', methods=['POST'])
 def update_flight_prices():
     rating = request.json.get('rating')
     if not rating:
@@ -75,8 +79,16 @@ def update_flight_prices():
 
     # send updated flighs info to RabbitMQ
     for updated_flight in updated_flights:
-        send_flight_info_to_queue(json.dumps(updated_flight, default=str))
-    
+        message = {
+            "flight_no": updated_flight["flight_no"],
+            "airline": updated_flight["airline"]["name"],
+            "src": updated_flight["src"]["id"],
+            "dst": updated_flight["dest"]["id"],
+            "price": updated_flight["price"],
+            "rating": updated_flight["airline"]["rating"]
+        }
+        send_flight_info_to_queue(json.dumps(message))
+
     return jsonify({"status": "airline ratings and prices updated"})
 
 # send flight info to RabbitMQ queue
@@ -85,12 +97,11 @@ def send_flight_info_to_queue(flight_info):
     if connection.is_closed:
         connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_host))
         channel = connection.channel()
-        channel.queue_declare(queue=rabbitmq_queue)
 
-    channel.basic_publish(exchange='',
-                          routing_key=rabbitmq_queue,
+    channel.basic_publish(exchange=rabbitmq_exchange,
+                          routing_key=rabbitmq_routing_key,
                           body=flight_info)
-    print(f" [x] Sent {flight_info}")
+    print(f" [x] Sent {flight_info} to {rabbitmq_exchange}")
 
 if __name__ == '__main__':
     app.run(debug=True)
