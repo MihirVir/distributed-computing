@@ -30,7 +30,7 @@ db = client["airline1_db"]
 airline1_collection = db["flights"]
 
 # get all flights' info
-@app.route('/api/v1/airline1-flight-info-service/flights', methods=['GET'])
+@app.route('/api/v1/airlin11-service/flights', methods=['GET'])
 def get_flights():
     flights = airline1_collection.find({}, {'_id': 0})
     flights_list = list(flights)
@@ -39,17 +39,16 @@ def get_flights():
     return jsonify(flights_list)
 
 # get specific flight info
-@app.route('/api/v1/airline1-flight-info-service/flights/<flight_no>', methods=['GET'])
+@app.route('/api/v1/airlin11-service/flights/<flight_no>', methods=['GET'])
 def get_flight(flight_no):
     flight = airline1_collection.find_one({"flight_no": flight_no}, {'_id': 0})
     if flight:
-        send_flight_info_to_queue(json.dumps(flight))  # 直接使用json.dumps，因为不再包含ObjectId
         return jsonify(flight)
     else:
         return "Flight not found", 404
 
 # update price according to the rating of airline
-@app.route('/api/v1/airline1-flight-info-service/flights/update-prices', methods=['POST'])
+@app.route('/api/v1/airlin11-service/flights/update-prices', methods=['POST'])
 def update_flight_prices():
     rating = request.json.get('rating')
     if not rating:
@@ -79,24 +78,6 @@ def update_flight_prices():
         send_flight_info_to_queue(json.dumps(updated_flight, default=str))
     
     return jsonify({"status": "airline ratings and prices updated"})
-
-
-# # add new flight
-# @app.route('/api/v1/airline1-flight-info-service/flights', methods=['POST'])
-# def add_flight():
-#     flight_data = request.json
-#     # maybe add some logical requests here
-#     airline1_collection.insert_one(flight_data)
-#     send_flight_info_to_queue(flight_data)
-#     return jsonify({"status": "flight added"}), 201
-
-# # delete flight
-# @app.route('/api/v1/airline1-flight-info-service/flights/<flight_no>', methods=['DELETE'])
-# def delete_flight(flight_no):
-#     result = airline1_collection.delete_one({"flight_no": flight_no})
-#     if result.deleted_count == 0:
-#         return jsonify({"error": "Flight not found"}), 404
-#     return jsonify({"status": "flight deleted"})
 
 # send flight info to RabbitMQ queue
 def send_flight_info_to_queue(flight_info):
