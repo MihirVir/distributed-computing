@@ -1,0 +1,28 @@
+server:
+  port: 8021
+spring:
+  application:
+    name: broker
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/flight_agent
+      retry:
+        maxAttempts: 3
+      socket-timeout: 10000
+rabbitmq:
+  direct:
+    exchangeName: flight.exchange
+    queueName: flight.queue
+    routingKey: flight
+
+
+
+
+
+
