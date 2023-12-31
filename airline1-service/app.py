@@ -104,4 +104,4 @@ def send_flight_info_to_queue(flight_info):
     print(f" [x] Sent {flight_info} to {rabbitmq_exchange}")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0",port=8001,debug=True)

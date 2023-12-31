@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: airline1-service-cluster-ip-service
+spec:
+  selector:
+    app: airline1-service
+  ports:
+    - port: 8001
+      targetPort: 8001
+  type: ClusterIP
