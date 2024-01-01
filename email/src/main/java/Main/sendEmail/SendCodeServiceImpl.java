@@ -1,7 +1,6 @@
 package Main.sendEmail;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -19,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 public class SendCodeServiceImpl implements SendCodeService {
     public final Long CODE_TTL = 120L;
 
-    @Autowired
-    StringRedisTemplate redisTemplate;
+//    @Autowired
+//    StringRedisTemplate redisTemplate;
 
     @Override
     public void sendEMail(String email, String code) throws MessagingException {
@@ -29,7 +28,7 @@ public class SendCodeServiceImpl implements SendCodeService {
         Mail.sendTestMail(email, code);
 
         // 2. Cache verify code to redis, TTL set to 2 minutes
-        redisTemplate.opsForValue().set(email, code, CODE_TTL, TimeUnit.SECONDS);
+//        redisTemplate.opsForValue().set(email, code, CODE_TTL, TimeUnit.SECONDS);
     }
 
 

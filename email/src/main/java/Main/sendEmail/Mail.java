@@ -79,7 +79,7 @@ public class Mail {
         // 设置邮件的内容体
         // Set email content body
         message.setContent(
-                "Dear user: Hello!\nYour registration verification code is: " + code + " (valid for one minute, please do not disclose to others)", "text/html;charset=UTF-8");
+                "Dear user: Hello!\nYour registration verification code is: " + code + " (valid for five minute, please do not disclose to others)", "text/html;charset=UTF-8");
         // 最后当然就是发送邮件啦
         // Finally, send the email
 

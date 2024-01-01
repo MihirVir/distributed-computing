@@ -35,13 +35,7 @@
         <version>1.18.8</version>
         <scope>provided</scope>
     </dependency>
-    <!--redis依赖-->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-redis</artifactId>
-        <version>2.3.7.RELEASE</version>
 
-    </dependency>
     <!--common-pool-->
     <dependency>
         <groupId>org.apache.commons</groupId>
@@ -53,6 +47,17 @@
         <groupId>javax.activation</groupId>
         <artifactId>activation</artifactId>
         <version>1.1.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver-sync</artifactId>
+        <version>4.4.0</version> <!-- 请检查最新版本 -->
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <version>2.3.7.RELEASE</version> <!-- 使用适合你的 Spring Boot 版本的版本号 -->
+        <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
     <dependency>
@@ -70,6 +75,23 @@
         <groupId>com.sun.mail</groupId>
         <artifactId>jakarta.mail</artifactId>
         <version>1.6.7</version>
+    </dependency>
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13.1</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        <version>2.3.7.RELEASE</version>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>RELEASE</version>
+        <scope>test</scope>
     </dependency>
 </dependencies>
     <properties>

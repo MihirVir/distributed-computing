@@ -4,3 +4,6 @@ server:
 spring:
   application:
     name: email
+    data:
+      mongodb:
+        uri: mongodb://localhost:27017/local
