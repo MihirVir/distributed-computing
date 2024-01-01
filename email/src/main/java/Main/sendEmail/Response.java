@@ -1,10 +1,13 @@
 package Main.sendEmail;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.stereotype.Component;
 
 @Component
+
 public class Response {
     int status; // 400 is error, 200 is ok
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     String code;
     String message;
 

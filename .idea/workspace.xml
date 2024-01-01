@@ -7,15 +7,9 @@
     <option name="showFiles" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fce5da8a-caab-4b5f-aee2-3de8bc2ecb58" name="Changes" comment="add verify">
-      <change afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/MongoConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/MongoConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/VerificationCodeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/VerificationCodeServiceImpl.java" afterDir="false" />
+    <list default="true" id="fce5da8a-caab-4b5f-aee2-3de8bc2ecb58" name="Changes" comment="finished">
+      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/Response.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/email/target/classes/Main/sendEmail/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/email/target/classes/Main/sendEmail/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/target/classes/Main/sendEmail/MongoConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/email/target/classes/Main/sendEmail/MongoConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/email/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +188,7 @@
       <workItem from="1704022831972" duration="5020000" />
       <workItem from="1704028180500" duration="1947000" />
       <workItem from="1704105145769" duration="511000" />
-      <workItem from="1704120674466" duration="3326000" />
+      <workItem from="1704120674466" duration="3699000" />
     </task>
     <task id="LOCAL-00001" summary="add the controller and service">
       <created>1703782419594</created>
@@ -245,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704027723787</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="finished">
+      <created>1704124040992</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1704124040992</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,6 +281,7 @@
     <MESSAGE value="add pom" />
     <MESSAGE value="add verification" />
     <MESSAGE value="add verify" />
-    <option name="LAST_COMMIT_MESSAGE" value="add verify" />
+    <MESSAGE value="finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished" />
   </component>
 </project>
