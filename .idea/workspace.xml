@@ -7,8 +7,15 @@
     <option name="showFiles" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fce5da8a-caab-4b5f-aee2-3de8bc2ecb58" name="Changes" comment="email post at 8081">
+    <list default="true" id="fce5da8a-caab-4b5f-aee2-3de8bc2ecb58" name="Changes" comment="add verify">
+      <change afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/Response.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/MongoConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/MongoConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/VerificationCodeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/Main/sendEmail/VerificationCodeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/target/classes/Main/sendEmail/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/email/target/classes/Main/sendEmail/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/target/classes/Main/sendEmail/MongoConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/email/target/classes/Main/sendEmail/MongoConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/email/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,13 +26,21 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
+        <option value="spring-beans.schema" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="spring-beans.schema" />
       </list>
     </option>
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="main" />
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="yilin-zhang" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -41,6 +56,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2a7xCUgwLsCncm32lob9jlp10Kp" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -55,17 +73,27 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;yilin-zhang&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-20&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Game/git/distributed-computing/email/src&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Game/git/distributed-computing&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.13967973&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.29089028&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;0c83f57c786a0b4a39efab23731c7ebc&quot;
+    &quot;spring.configuration.checksum&quot;: &quot;0c83f57c786a0b4a39efab23731c7ebc&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mongo&quot;
+    ]
   }
 }</component>
   <component name="ReactorSettings">
@@ -76,13 +104,19 @@
       <recent name="Controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Game\git\distributed-computing\email" />
       <recent name="D:\Game\git\distributed-computing\email\src" />
       <recent name="D:\Game\git\distributed-computing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Game\git\distributed-computing\email\src\main\java\Main\sendEmail" />
       <recent name="D:\Game\git\distributed-computing\email\src\main\java" />
       <recent name="D:\Game\git\distributed-computing\email\controller" />
       <recent name="D:\Game\git\distributed-computing\email\untitled\src\main\java" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="test" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
@@ -98,6 +132,24 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VerificationCodeServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="email" />
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.VerificationCodeServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VerificationCodeServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="email" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="VerificationCodeServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -119,8 +171,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.EmailApplication" />
-        <item itemvalue="Spring Boot.emailApplication" />
-        <item itemvalue="Application.MailUtil" />
       </list>
     </recent_temporary>
   </component>
@@ -140,6 +190,11 @@
       <workItem from="1703780660020" duration="6273000" />
       <workItem from="1703795047965" duration="334000" />
       <workItem from="1703795431144" duration="3368000" />
+      <workItem from="1703858797966" duration="768000" />
+      <workItem from="1704022831972" duration="5020000" />
+      <workItem from="1704028180500" duration="1947000" />
+      <workItem from="1704105145769" duration="511000" />
+      <workItem from="1704120674466" duration="3326000" />
     </task>
     <task id="LOCAL-00001" summary="add the controller and service">
       <created>1703782419594</created>
@@ -162,7 +217,35 @@
       <option name="project" value="LOCAL" />
       <updated>1703852481363</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="email post at 8081">
+      <created>1703858839060</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1703858839060</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add pom">
+      <created>1704022929612</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1704022929612</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add verification">
+      <created>1704027529184</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1704027529184</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add verify">
+      <created>1704027723787</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1704027723787</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,7 +256,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/yilin-zhang" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -182,6 +277,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add the controller and service" />
     <MESSAGE value="email post at 8081" />
-    <option name="LAST_COMMIT_MESSAGE" value="email post at 8081" />
+    <MESSAGE value="add pom" />
+    <MESSAGE value="add verification" />
+    <MESSAGE value="add verify" />
+    <option name="LAST_COMMIT_MESSAGE" value="add verify" />
   </component>
 </project>

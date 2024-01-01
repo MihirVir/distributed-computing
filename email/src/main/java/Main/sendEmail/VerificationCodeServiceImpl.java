@@ -33,7 +33,7 @@ public class VerificationCodeServiceImpl implements VerificationCodeService{
                 .append("createdAt", new Date());
         collection.insertOne(doc);
     }
-
+    @Override
     public boolean verifyCode(String email, String code) {
         MongoCollection<Document> collection = database.getCollection("verificationCodes");
         Document doc = collection.find(new Document("email", email)).sort(new Document("createdAt", -1)).first();

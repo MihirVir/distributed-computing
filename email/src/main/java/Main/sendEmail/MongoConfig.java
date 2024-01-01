@@ -18,13 +18,12 @@ import org.springframework.context.annotation.Configuration;
 public class MongoConfig {
         @Bean
         public MongoClient mongoClient() {
-            // 连接到 MongoDB 服务器 (默认是 localhost:27017)
+            // connect to MongoDB
             return MongoClients.create("mongodb://localhost:27017");
         }
 
         @Bean
         public MongoDatabase mongoDatabase(MongoClient mongoClient) {
-            // 获取指定的数据库
             return mongoClient.getDatabase("local");
         }
 }
