@@ -1,7 +1,7 @@
 from flask import Flask, jsonify,request
 import pymongo
 import os
-import random
+import datetime
 import pycountry
 import findspark
 import threading
@@ -32,14 +32,18 @@ mongo_port = int(os.environ["MONGO_PORT"])
 database_name = 'mydatabase'
 collection_name = 'countries'
 trip_collection_name = 'trips'
+user_activity_collection_name = 'user_activity'
+
 # # Connect to MongoDB
 client = pymongo.MongoClient(mongo_host, mongo_port)
 database = client[database_name]
 collection = database[collection_name]
 trip_collection = database[trip_collection_name]
+user_activity_collection = database[user_activity_collection_name]
 
 countries_data = []
 collection.delete_many({})
+
 for country in pycountry.countries:
     country_data = {
         "name": country.name,
@@ -99,6 +103,31 @@ def update_flight_rating(request_data):
     new_rating = round((flight.get("rating")*rating_count + rating)/(rating_count+1),1)
     trip_collection.update_one({"flight_no":flight_no},{"$set":{"rating":new_rating,"rating_count":rating_count+1}})
 
+def get_user_price_rate(user_id):
+
+    max_rate = 0.3
+    if len(user_id)==0:
+        return 1
+    
+    user_activity = user_activity_collection.find_one({"user_id":user_id})
+    if user_activity == None:
+        user_activity_collection.insert_one({"user_id":user_id,"clicks":1,"first_click_time":datetime.datetime.now(),"current_rate":0})
+        return 1
+    
+    clicks = user_activity.get("clicks",1)
+    rate = int(clicks/5) * 0.05
+    rate = max_rate if rate > max_rate else rate
+
+    update_document = {
+        "clicks" : clicks+1,
+        "rate" : rate
+    }
+
+    user_activity_collection.update_one({"user_id":user_id},{"$set":update_document},upsert=True)
+
+    return 1+rate
+
+
 
 @app.route('/api/v1/flight-routes-service/flight-rating', methods=['PUT'])
 def update_flight_rating_api():
@@ -129,12 +158,13 @@ def flight_routes():
 
     dest = request.args.get("dest")
     src = request.args.get("src")
-    
+    user_id = request.args.get("user_id","")
 
     schema = StructType([
     StructField("name", StringType(), True),
     StructField("id", StringType(), True),
     ])
+
     data = [tuple(doc.values()) for doc in collection.find({},{"_id":0})]
     df = spark.createDataFrame(data, schema=schema)
 
@@ -153,20 +183,21 @@ def flight_routes():
     tripGraph = GraphFrame(df, trip_df)
     flight_routes = []
     motifs = tripGraph.find("(a)-[e]->(b); (b)-[e2]->(c)").filter("a.id == '{}' and c.id == '{}'".format(src,dest))
+    rate = get_user_price_rate(user_id)
     for row in motifs.rdd.collect():
         print(row.a['id'])
         print(row.e['flight_no'])
 
         flight_routes.append({"src":{"id":row.a['id'],"name":row.a['name']}, "layover":{"id":row.b['id'],"name":row.b['name']}, "dest":{"id":row.c['id'],"name":row.c['name']},
                                "flights":[{"flight_no" : row.e['flight_no'],"airline": row.e['flight_no'],"rating": row.e['rating']},{"flight_no" : row.e2['flight_no'],"airline": row.e2['flight_no'],"rating": row.e2['rating']}],
-                               "price" : int(row.e["price"]) + int(row.e2["price"]), "type" : "layover"        
+                               "price" : (int(row.e["price"]) + int(row.e2["price"]))*rate, "type" : "layover"        
                                })
     motifs = tripGraph.find("(a)-[e]->(b)").filter("a.id == '{}' and b.id == '{}'".format(src,dest))
     for row in motifs.rdd.collect():
 
         flight_routes.append({"src":{"id":row.a['id'],"name":row.a['name']}, "dest":{"id":row.b['id'],"name":row.b['name']},
                                "flights":[{"flight_no" : row.e['flight_no'],"airline": row.e['flight_no'],"rating": row.e['rating']}],
-                               "price" : int(row.e["price"]), "type" : "direct"        
+                               "price" : int(row.e["price"])*rate, "type" : "direct"        
                                })       
     return jsonify(flight_routes)
 
