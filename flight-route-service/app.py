@@ -17,6 +17,7 @@ from pyspark import SparkConf
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
 from graphframes import GraphFrame
 
+
 conf = SparkConf()
 conf.set("spark.jars.packages", "graphframes:graphframes:0.8.3-spark3.5-s_2.12")
 conf.set("spark.sql.repl.eagerEval.enabled", True) #  This will format our output tables a bit nicer when not using the show() method
