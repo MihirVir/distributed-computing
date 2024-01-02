@@ -6,7 +6,8 @@ import pycountry
 import findspark
 import threading
 import time
-
+import requests
+import json
 app = Flask(__name__)
 
 
@@ -33,6 +34,7 @@ database_name = 'mydatabase'
 collection_name = 'countries'
 trip_collection_name = 'trips'
 user_activity_collection_name = 'user_activity'
+airline_collection_name = 'airlines'
 
 # # Connect to MongoDB
 client = pymongo.MongoClient(mongo_host, mongo_port)
@@ -40,6 +42,7 @@ database = client[database_name]
 collection = database[collection_name]
 trip_collection = database[trip_collection_name]
 user_activity_collection = database[user_activity_collection_name]
+airline_collection = database[airline_collection_name]
 
 countries_data = []
 collection.delete_many({})
@@ -93,17 +96,24 @@ trips_data = [
 trip_collection.insert_many(trips_data)
 
 
-def update_flight_rating(request_data):
+def update_airline_rating(request_data):
+    airlines = {"airline1": "http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights/update-prices"}
     time.sleep(1)
     rating = request_data.get("rating")
-    flight_no = request_data.get("flight_no")
+    airline = request_data.get("airline")
     
-    flight = trip_collection.find_one({"flight_no":flight_no})
+    flight = airline_collection.find_one({"airline":airline})
+    if flight == None:
+        flight={}
     rating_count = flight.get("rating_count",0)
-    new_rating = round((flight.get("rating")*rating_count + rating)/(rating_count+1),1)
-    trip_collection.update_one({"flight_no":flight_no},{"$set":{"rating":new_rating,"rating_count":rating_count+1}})
+    new_rating = round((flight.get("rating",0)*rating_count + rating)/(rating_count+1),1)
+    airline_collection.update_one({"airline":airline},{"$set":{"rating":new_rating,"rating_count":rating_count+1}})
+    url = airlines.get(airline, "http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights/update-prices")
+    body = {"rating":rating}
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(url,data = json.dumps(body),headers=headers)
 
-def get_user_price_rate(user_id):
+def get_user_price_rate(user_id,):
 
     max_rate = 0.3
     if len(user_id)==0:
@@ -134,7 +144,7 @@ def update_flight_rating_api():
 
     
     request_data = request.get_json()
-    my_thread = threading.Thread(target=update_flight_rating,args=(request_data,))
+    my_thread = threading.Thread(target=update_airline_rating,args=(request_data,))
     my_thread.start()
 
     return jsonify({"result":"successfully updated"})

@@ -11,7 +11,7 @@ RUN pip install findspark
 RUN pip install pymongo
 RUN pip install graphframes
 RUN pip install pycountry
-
+RUN pip install requests
 ENV PYTHONUNBUFFERED=1
 COPY . /app
 
