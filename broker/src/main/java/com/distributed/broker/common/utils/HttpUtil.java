@@ -5,6 +5,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
+
 /**
  * http request util
  *
@@ -35,14 +37,36 @@ public class HttpUtil {
     }
 
     /**
-     * post
+     * post json
      *
      * @param url
      * @param params
      * @return
      */
-    public static String post(String url, MultiValueMap<String, String> params) {
-        return post(url, params, null);
+    public static String post(String url, String jsonPayload) {
+        //String apiUrl = "https://example.com/api/post";
+
+        // JSON payload as a String
+        //String jsonPayload = "{\"key1\":\"value1\",\"key2\":\"value2\"}";
+
+        // Create HttpHeaders with Content-Type set to application/json
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+        // Create an HttpEntity with the JSON payload and headers
+        HttpEntity<String> requestEntity = new HttpEntity<>(jsonPayload, headers);
+
+        // Create a RestTemplate instance
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Send the POST request
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, requestEntity, String.class);
+
+        // Print the response
+        System.out.println("Response Code: " + responseEntity.getStatusCode());
+        System.out.println("Response Body: " + responseEntity.getBody());
+        return responseEntity.getBody();
     }
 
     /**

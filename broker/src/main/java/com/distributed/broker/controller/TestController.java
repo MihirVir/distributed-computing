@@ -1,5 +1,7 @@
 package com.distributed.broker.controller;
 
+import com.distributed.broker.controller.Request.AirlinePayRequest;
+import com.distributed.broker.controller.Response.PayResponse;
 import com.distributed.broker.pojo.Flight;
 import com.distributed.broker.pojo.UserActivity;
 import com.distributed.broker.repository.UserActivityRepository;
@@ -23,5 +25,15 @@ public class TestController {
     @RequestMapping(method = RequestMethod.GET, value = "test2/{flight_no}")
     public Flight test2(@PathVariable("flight_no") String flight_no){
         return Flight.builder().flightNo("002").dst("CHN").src("IRE").airline("Emirates").rating(5).price(500).build();
+    }
+    @RequestMapping(method = RequestMethod.POST, value = "test3")
+    public PayResponse test3(@RequestBody AirlinePayRequest airlinePayRequest){
+        System.out.println(airlinePayRequest.toString());
+        return new PayResponse(1);
+    }
+    @RequestMapping(method = RequestMethod.POST, value = "test4")
+    public PayResponse test4(@RequestBody AirlinePayRequest airlinePayRequest){
+        System.out.println(airlinePayRequest.toString());
+        return new PayResponse(1);
     }
 }
