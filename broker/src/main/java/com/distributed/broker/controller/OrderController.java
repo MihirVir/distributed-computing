@@ -3,6 +3,7 @@ package com.distributed.broker.controller;
 import com.distributed.broker.common.exeption.ResultResponse;
 import com.distributed.broker.common.version.ApiVersion;
 import com.distributed.broker.controller.Request.CreateOrderRequest;
+import com.distributed.broker.controller.Request.PayOrderRequest;
 import com.distributed.broker.controller.Response.CreateOrderResponse;
 import com.distributed.broker.service.OrderService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -32,5 +33,11 @@ public class OrderController {
     @RequestMapping(value = "create",method = RequestMethod.POST)
     public ResultResponse createOrder(@RequestBody CreateOrderRequest createOrderRequest){
         return ResultResponse.success(orderService.createOrder(createOrderRequest.getUserId(), createOrderRequest.getFlightMap()));
+    }
+
+    @ApiVersion("1")
+    @RequestMapping(value = "pay",method = RequestMethod.POST)
+    public ResultResponse payOrder(@RequestBody PayOrderRequest payOrderRequest){
+        return ResultResponse.success(orderService.payForOrder(payOrderRequest.getOrderId()));
     }
 }
