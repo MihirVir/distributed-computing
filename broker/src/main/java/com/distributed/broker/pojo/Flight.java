@@ -1,10 +1,14 @@
 package com.distributed.broker.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
 
 /**
  * @author RuchenLai
@@ -13,8 +17,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "flights")
-public class Flight {
+public class Flight implements Serializable {
     @Id
     @JsonProperty("flight_no")
     private String flightNo;
@@ -25,7 +31,7 @@ public class Flight {
     @JsonProperty("dst")
     private String dst;
     @JsonProperty("price")
-    private int price;
+    private double price;
     @JsonProperty("rating")
     private double rating;
 }

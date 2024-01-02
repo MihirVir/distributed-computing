@@ -15,20 +15,21 @@ spring:
       retry:
         maxAttempts: 3
       socket-timeout: 10000
-    redis:
-      host: 127.0.0.1
-      port: 6379
-      database: 0
-      password: 123456
-      connect-timeout: 5s
-      timeout: 5s
-      lettuce:
-        pool:
-          min-idle: 0
-          max-idle: 8
-          max-active: 8
-          max-wait: -1ms
+api:
+  airline1: http://127.0.0.1:8021/test1
+  airline2: http://127.0.0.1:8021/test2
 
+async:
+  executor:
+    thread:
+      core_pool_size: 3
+      max_pool_size: 6
+      queue_capacity: 100
+      keep_alive_seconds: 300
+      thread_name_prefix: Async-Service-
+
+order:
+  expire-time: 20000
 
 
 

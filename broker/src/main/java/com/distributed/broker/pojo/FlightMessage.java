@@ -1,7 +1,9 @@
 package com.distributed.broker.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.NoArgsConstructor;
 
 /**
  * @author RuchenLai
@@ -9,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @description
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class FlightMessage {
     @JsonProperty("flight_no")
     private String flightNo;
@@ -19,7 +23,7 @@ public class FlightMessage {
     @JsonProperty("dst")
     private String dst;
     @JsonProperty("price")
-    private int price;
+    private double price;
     @JsonProperty("rating")
     private double rating;
 }
