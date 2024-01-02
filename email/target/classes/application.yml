@@ -1,6 +1,9 @@
 server:
-  port: 8081
+  port: 8000
 
 spring:
   application:
     name: email
+    data:
+      mongodb:
+        uri: mongodb://localhost:27017/local

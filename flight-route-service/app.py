@@ -1,12 +1,13 @@
 from flask import Flask, jsonify,request
 import pymongo
 import os
-import random
+import datetime
 import pycountry
 import findspark
 import threading
 import time
-
+import requests
+import json
 app = Flask(__name__)
 
 
@@ -16,6 +17,7 @@ from pyspark.sql import SparkSession
 from pyspark import SparkConf
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
 from graphframes import GraphFrame
+
 
 conf = SparkConf()
 conf.set("spark.jars.packages", "graphframes:graphframes:0.8.3-spark3.5-s_2.12")
@@ -31,14 +33,20 @@ mongo_port = int(os.environ["MONGO_PORT"])
 database_name = 'mydatabase'
 collection_name = 'countries'
 trip_collection_name = 'trips'
+user_activity_collection_name = 'user_activity'
+airline_collection_name = 'airlines'
+
 # # Connect to MongoDB
 client = pymongo.MongoClient(mongo_host, mongo_port)
 database = client[database_name]
 collection = database[collection_name]
 trip_collection = database[trip_collection_name]
+user_activity_collection = database[user_activity_collection_name]
+airline_collection = database[airline_collection_name]
 
 countries_data = []
 collection.delete_many({})
+
 for country in pycountry.countries:
     country_data = {
         "name": country.name,
@@ -88,23 +96,55 @@ trips_data = [
 trip_collection.insert_many(trips_data)
 
 
-def update_flight_rating(request_data):
+def update_airline_rating(request_data):
+    airlines = {"airline1": "http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights/update-prices"}
     time.sleep(1)
     rating = request_data.get("rating")
-    flight_no = request_data.get("flight_no")
+    airline = request_data.get("airline")
     
-    flight = trip_collection.find_one({"flight_no":flight_no})
+    flight = airline_collection.find_one({"airline":airline})
+    if flight == None:
+        flight={}
     rating_count = flight.get("rating_count",0)
-    new_rating = round((flight.get("rating")*rating_count + rating)/(rating_count+1),1)
-    trip_collection.update_one({"flight_no":flight_no},{"$set":{"rating":new_rating,"rating_count":rating_count+1}})
+    new_rating = round((flight.get("rating",0)*rating_count + rating)/(rating_count+1),1)
+    airline_collection.update_one({"airline":airline},{"$set":{"rating":new_rating,"rating_count":rating_count+1}})
+    url = airlines.get(airline, "http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights/update-prices")
+    body = {"rating":rating}
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(url,data = json.dumps(body),headers=headers)
+
+def get_user_price_rate(user_id,):
+
+    max_rate = 0.3
+    if len(user_id)==0:
+        return 1
+    
+    user_activity = user_activity_collection.find_one({"user_id":user_id})
+    if user_activity == None:
+        user_activity_collection.insert_one({"user_id":user_id,"clicks":1,"first_click_time":datetime.datetime.now(),"current_rate":0})
+        return 1
+    
+    clicks = user_activity.get("clicks",1)
+    rate = int(clicks/5) * 0.05
+    rate = max_rate if rate > max_rate else rate
+
+    update_document = {
+        "clicks" : clicks+1,
+        "rate" : rate
+    }
+
+    user_activity_collection.update_one({"user_id":user_id},{"$set":update_document},upsert=True)
+
+    return 1+rate
 
 
-@app.route('/api/v1/flight-routes-service/flight-rating', methods=['PUT'])
+
+@app.route('/api/v1/flight-routes-service/airline-rating', methods=['PUT'])
 def update_flight_rating_api():
 
     
     request_data = request.get_json()
-    my_thread = threading.Thread(target=update_flight_rating,args=(request_data,))
+    my_thread = threading.Thread(target=update_airline_rating,args=(request_data,))
     my_thread.start()
 
     return jsonify({"result":"successfully updated"})
@@ -128,12 +168,13 @@ def flight_routes():
 
     dest = request.args.get("dest")
     src = request.args.get("src")
-    
+    user_id = request.args.get("user_id","")
 
     schema = StructType([
     StructField("name", StringType(), True),
     StructField("id", StringType(), True),
     ])
+
     data = [tuple(doc.values()) for doc in collection.find({},{"_id":0})]
     df = spark.createDataFrame(data, schema=schema)
 
@@ -152,20 +193,21 @@ def flight_routes():
     tripGraph = GraphFrame(df, trip_df)
     flight_routes = []
     motifs = tripGraph.find("(a)-[e]->(b); (b)-[e2]->(c)").filter("a.id == '{}' and c.id == '{}'".format(src,dest))
+    rate = get_user_price_rate(user_id)
     for row in motifs.rdd.collect():
         print(row.a['id'])
         print(row.e['flight_no'])
 
         flight_routes.append({"src":{"id":row.a['id'],"name":row.a['name']}, "layover":{"id":row.b['id'],"name":row.b['name']}, "dest":{"id":row.c['id'],"name":row.c['name']},
                                "flights":[{"flight_no" : row.e['flight_no'],"airline": row.e['flight_no'],"rating": row.e['rating']},{"flight_no" : row.e2['flight_no'],"airline": row.e2['flight_no'],"rating": row.e2['rating']}],
-                               "price" : int(row.e["price"]) + int(row.e2["price"]), "type" : "layover"        
+                               "price" : (int(row.e["price"]) + int(row.e2["price"]))*rate, "type" : "layover"        
                                })
     motifs = tripGraph.find("(a)-[e]->(b)").filter("a.id == '{}' and b.id == '{}'".format(src,dest))
     for row in motifs.rdd.collect():
 
         flight_routes.append({"src":{"id":row.a['id'],"name":row.a['name']}, "dest":{"id":row.b['id'],"name":row.b['name']},
                                "flights":[{"flight_no" : row.e['flight_no'],"airline": row.e['flight_no'],"rating": row.e['rating']}],
-                               "price" : int(row.e["price"]), "type" : "direct"        
+                               "price" : int(row.e["price"])*rate, "type" : "direct"        
                                })       
     return jsonify(flight_routes)
 

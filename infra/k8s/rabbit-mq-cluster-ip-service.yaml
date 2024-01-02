@@ -9,8 +9,8 @@ spec:
   ports:
     - port : 5672
       targetPort: 5672
-      name: AMQP
+      name: amqp
 
     - port : 15672 
       targetPort: 15672
-      name: Console
+      name: console

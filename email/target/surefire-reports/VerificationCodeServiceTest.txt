@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: VerificationCodeServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 36.374 s <<< FAILURE! - in VerificationCodeServiceTest
+testStoreAndVerifyCode  Time elapsed: 30.169 s  <<< ERROR!
+com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused}}]
+	at VerificationCodeServiceTest.testStoreAndVerifyCode(VerificationCodeServiceTest.java:37)
+

@@ -32,6 +32,13 @@ spec:
                 name: user-srv
                 port:
                   number: 5000
+          - path: /api/v1/email/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: email-srv
+                port:
+                  number: 7999
           # if above paths doesn't matches request is transfered
           # to client.
           - path: /?(.*)
@@ -41,3 +48,4 @@ spec:
                 name: client-service
                 port:
                   number: 5173
+          

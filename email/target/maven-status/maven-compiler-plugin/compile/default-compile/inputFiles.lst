@@ -1,4 +1,9 @@
-/Users/mihir/Desktop/distributed-computing-project/email/src/main/java/LoginController.java
-/Users/mihir/Desktop/distributed-computing-project/email/src/main/java/SendCodeService.java
-/Users/mihir/Desktop/distributed-computing-project/email/src/main/java/SendCodeServiceImpl.java
-/Users/mihir/Desktop/distributed-computing-project/email/src/main/java/Mail.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/EmailApplication.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/LoginController.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/VerificationCodeService.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/SendCodeService.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/Response.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/Mail.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/VerificationCodeServiceImpl.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/MongoConfig.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/SendCodeServiceImpl.java
