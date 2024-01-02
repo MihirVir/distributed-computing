@@ -139,7 +139,7 @@ def get_user_price_rate(user_id,):
 
 
 
-@app.route('/api/v1/flight-routes-service/flight-rating', methods=['PUT'])
+@app.route('/api/v1/flight-routes-service/airline-rating', methods=['PUT'])
 def update_flight_rating_api():
 
     
