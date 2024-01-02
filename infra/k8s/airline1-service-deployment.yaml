@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: airlin1-service
+  name: airline1-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: airlin1-service
+      app: airline1-service
   template:
     metadata:
       labels:
-        app: airlin1-service
+        app: airline1-service
     spec:
       containers:
-      - name: airlin1-service
+      - name: airline1-service
         image: jettzgg/airline1-service:latest
         imagePullPolicy: Always
         ports:
