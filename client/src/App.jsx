@@ -4,12 +4,11 @@ import {
     Routes,
     Route
 } from "react-router-dom"
-import "./app.css"
 import Home from './pages/Home/Home'
 import Results from './pages/Results/Results'
 import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
-
+import "./app.css"
 /*
   creating multi paged application with react router dom 
  */

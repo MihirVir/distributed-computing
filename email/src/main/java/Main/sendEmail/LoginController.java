@@ -18,12 +18,13 @@ import javax.mail.MessagingException;
  * @Creat: 2023/12/28
  */
 @RestController
+@RequestMapping("/api/v1/email")
 public class LoginController {
     @Autowired
     SendCodeService sendCodeService;
 
     @ApiOperation(value = "Send email verification code", tags = "Send email verification code")
-    @PostMapping ("/email_code")
+    @GetMapping ("/email_code")
     public Response sendEMail(@RequestParam("email") String email) {
         String code = Mail.achieveCode();
         Response response = new Response();
@@ -57,7 +58,7 @@ public class LoginController {
     VerificationCodeService verificationCodeService;
 
     @ApiOperation(value = "User login with email verification code", tags = "verify email verification code")
-    @PostMapping("/verify_code")
+    @GetMapping("/verify_code")
     public Response login(@RequestParam("email") String email, @RequestParam("code") String code) {
         boolean isCodeValid = verificationCodeService.verifyCode(email, code);
         Response response = null;

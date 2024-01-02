@@ -19,11 +19,11 @@ public class MongoConfig {
         @Bean
         public MongoClient mongoClient() {
             // connect to MongoDB
-            return MongoClients.create("mongodb://localhost:27017");
+            return MongoClients.create("mongodb://mongo-cluster-ip-service:27017");
         }
 
         @Bean
         public MongoDatabase mongoDatabase(MongoClient mongoClient) {
-            return mongoClient.getDatabase("local");
+            return mongoClient.getDatabase("email");
         }
 }

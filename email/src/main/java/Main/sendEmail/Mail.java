@@ -37,12 +37,15 @@ public class Mail {
         // 表示SMTP发送邮件，必须进行身份验证
         // Indicates SMTP for sending mail, needs authentication
         props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true"); 
         //此处填写SMTP服务器
         // Fill in the SMTP server here
-        props.put("mail.smtp.host", "smtp.qq.com");
+        props.put("mail.smtp.host", "smtp.gmail.com");
         //端口号，QQ邮箱端口587
         // Port number, QQ mail uses 587
         props.put("mail.smtp.port", "587");
+        
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         // 此处填写，写信人的账号
         // Fill in the sender's account here
         props.put("mail.user", "2842830122@qq.com");

@@ -1,8 +1,9 @@
-D:\Game\git\distributed-computing\email\src\main\java\Main\sendEmail\LoginController.java
-D:\Game\git\distributed-computing\email\src\main\java\Main\sendEmail\SendCodeServiceImpl.java
-D:\Game\git\distributed-computing\email\src\main\java\Main\sendEmail\MongoConfig.java
-D:\Game\git\distributed-computing\email\src\main\java\Main\EmailApplication.java
-D:\Game\git\distributed-computing\email\src\main\java\Main\sendEmail\SendCodeService.java
-D:\Game\git\distributed-computing\email\src\main\java\Main\sendEmail\Mail.java
-D:\Game\git\distributed-computing\email\src\main\java\Main\sendEmail\VerificationCodeService.java
-D:\Game\git\distributed-computing\email\src\main\java\Main\sendEmail\VerificationCodeServiceImpl.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/EmailApplication.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/LoginController.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/VerificationCodeService.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/SendCodeService.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/Response.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/Mail.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/VerificationCodeServiceImpl.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/MongoConfig.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/SendCodeServiceImpl.java
