@@ -4,7 +4,7 @@ import pymongo
 import os
 
 # Read MongoDB host and port from environment variables or use default values
-mongo_host = os.getenv('MONGO_HOST', 'localhost')
+mongo_host = os.getenv('MONGO_HOST', 'mongo-cluster-ip-service')
 mongo_port = int(os.getenv('MONGO_PORT', '27017'))
 
 # Connect to MongoDB
