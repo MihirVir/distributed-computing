@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: email
-          image: mihirvir10/email
+          image: navjots20/email:latest
           ports:
-            - containerPort: 8000
+            - containerPort: 7999
           env:
             - name: MONGO_HOST
               value: mongo-cluster-ip-service
@@ -34,6 +34,6 @@ spec:
     app: email
   ports:
     - name: email
-      port: 8000
-      targetPort: 8000
+      port: 7999
+      targetPort: 7999
       protocol: TCP

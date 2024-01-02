@@ -48,10 +48,11 @@ public class Mail {
         props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         // 此处填写，写信人的账号
         // Fill in the sender's account here
-        props.put("mail.user", "2842830122@qq.com");
+        props.put("mail.user", "navjot2454@gmail.com");
         // 此处填写16位STMP口令
         // Fill in the 16-digit STMP token
-        props.put("mail.password", "ofrugpjedziwdefg");
+        props.put("mail.password", "zevt gqeq yrvw fuzl");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         // 构建授权信息，用于进行SMTP进行身份验证
         // Build authentication information for SMTP authentication
         Authenticator authenticator = new Authenticator() {

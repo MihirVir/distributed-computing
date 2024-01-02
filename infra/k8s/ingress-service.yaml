@@ -38,7 +38,7 @@ spec:
               service:
                 name: email-srv
                 port:
-                  number: 8000
+                  number: 7999
           # if above paths doesn't matches request is transfered
           # to client.
           - path: /?(.*)
