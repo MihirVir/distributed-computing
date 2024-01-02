@@ -8,8 +8,8 @@ from bson import json_util
 app = Flask(__name__)
 
 # Set RabbitMQ connection details with environment variables or default values
-rabbitmq_host = os.getenv('RABBITMQ_HOST', 'localhost')
-rabbitmq_port = int(os.getenv('RABBITMQ_PORT', 5672))
+rabbitmq_host = os.getenv('RABBITMQ_HOST', 'rabbitmq')
+rabbitmq_port = int(os.getenv('RABBITMQ_SERVICE_PORT', 5672))
 rabbitmq_exchange = 'flight.exchange'
 rabbitmq_queue = 'flight.queue'
 rabbitmq_routing_key = 'flight'
