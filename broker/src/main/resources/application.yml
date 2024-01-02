@@ -4,14 +4,14 @@ spring:
   application:
     name: broker
   rabbitmq:
-    host: 127.0.0.1
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest
     virtual-host: /
   data:
     mongodb:
-      uri: mongodb://127.0.0.1:27017/flight_agent
+      uri: mongodb://mongo:27017/flight_agent
       retry:
         maxAttempts: 3
       socket-timeout: 10000
