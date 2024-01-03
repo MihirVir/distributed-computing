@@ -18,7 +18,7 @@ export const store = configureStore({
     reducer: {
         search: searchReducer,
         filter: filterReducer,
-        user: userReducer
+        user: userReducer,
         order: orderReducer
     }
 });

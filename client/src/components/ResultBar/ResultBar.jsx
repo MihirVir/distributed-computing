@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'; // 引入 axios
 import { FaSearch } from "react-icons/fa";
 import { IoFilterSharp } from "react-icons/io5";
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,19 +7,36 @@ import {
   setSortOption,
   clearSortOption
 } from "../../state/filter/filter_slice"
+import { setOrderData, clearOrderData } from '../../state/order/order_slice'; // 引入这些动作
 import "./resultbar.css"
 
 const ResultBar = (props) => {
   const dispatch = useDispatch();
   const sort_by = useSelector((state) => state.filter.sort_by);
   const { searchResults } = props;
-  const handleCreateOrder = () => {
-    const orderData = {
-      userId: userId,
-      flightMap: selectedFlights // 使用用户选择的航班信息
-    };
-    dispatch(createOrder(orderData));
-  };
+  const createOrder = (userId, flightMap) => async (dispatch) => {
+    try {
+      // API request to create the order
+      const response = await axios.post('http://localhost/broker_service/api/v1/order/create', {
+        userId,
+        flightMap
+      });
+  
+      // Check if the response is successful
+      if (response.data.code === "200") {
+        // Dispatch the setOrderData action to update the Redux store
+        dispatch(setOrderData(response.data.result));
+      } else {
+        // Handle non-successful responses
+        console.error('Order creation failed:', response.data.message);
+        dispatch(clearOrderData());
+      }
+    } catch (error) {
+      // Handle any errors during the API call
+      console.error('Error creating order:', error);
+      dispatch(clearOrderData());
+    }
+  }
   
   const handleOptionSelected = (e) => {
     dispatch(setSortOption(e.target.value));
@@ -37,8 +55,6 @@ const ResultBar = (props) => {
             </select>
           </div>
         </div>
-         {/* 添加创建订单的按钮 */}
-      <button onClick={handleCreateOrder}>Create Order</button>
     </div>
   );
 }
