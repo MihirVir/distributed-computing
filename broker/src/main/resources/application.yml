@@ -11,7 +11,7 @@ spring:
     virtual-host: /
   data:
     mongodb:
-      uri: mongodb://mongo:27017/flight_agent
+      uri: mongodb://mongo-cluster-ip-service:27017/flight_agent
       retry:
         maxAttempts: 3
       socket-timeout: 10000
