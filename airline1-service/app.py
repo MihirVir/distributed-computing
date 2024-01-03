@@ -31,12 +31,13 @@ mongo_port = int(os.getenv('MONGO_PORT', '27017'))
 # Connect to MongoDB
 client = pymongo.MongoClient(f"mongodb://{mongo_host}:{mongo_port}/")
 db = client["airline1_db"]
-airline1_collection = db["flights"]
+flight_collection = db["flights"]
+order_collection = db["orders"]
 
 # get all flights' info
 @app.route('/api/v1/airline1-service/flights', methods=['GET'])
 def get_flights():
-    flights = airline1_collection.find({}, {'_id': 0})
+    flights = flight_collection.find({}, {'_id': 0})
     flights_list = list(flights)
     for flight in flights_list:
         send_flight_info_to_queue(str(flight))
@@ -45,7 +46,7 @@ def get_flights():
 # get specific flight info
 @app.route('/api/v1/airline1-service/flights/<flight_no>', methods=['GET'])
 def get_flight(flight_no):
-    flight = airline1_collection.find_one({"flight_no": flight_no}, {'_id': 0})
+    flight = flight_collection.find_one({"flight_no": flight_no}, {'_id': 0})
     if flight:
         return jsonify(flight)
     else:
@@ -58,14 +59,14 @@ def update_flight_prices():
     if not rating:
         return jsonify({"error": "Rating not provided"}), 400
 
-    flights = airline1_collection.find()
+    flights = flight_collection.find()
     updated_flights = []
 
     for flight in flights:
         # calculate new price
         new_price = int(flight['price'] * (rating / flight['airline']['rating']))
         # update info
-        airline1_collection.update_one(
+        flight_collection.update_one(
             {"_id": flight['_id']},
             {"$set": {
                 "price": new_price,
@@ -102,6 +103,34 @@ def send_flight_info_to_queue(flight_info):
                           routing_key=rabbitmq_routing_key,
                           body=flight_info)
     print(f" [x] Sent {flight_info} to {rabbitmq_exchange}")
+
+@app.route('/api/v1/airline1-service/orders/payment-success', methods=['POST'])
+def payment_success():
+    data = request.json
+    user_id = data.get('user_id')
+    flight_no = data.get('flight_no')
+    price = data.get('price')
+
+    success = create_order(user_id, flight_no, price)
+
+    if success:
+        return jsonify({"status": 1})
+    else:
+        return jsonify({"status": 0}), 400
+
+def create_order(user_id, flight_no, price):
+    try:
+        # create order and insert to order collection
+        order = {
+            "user_id": user_id,
+            "flight_no": flight_no,
+            "price": price
+        }
+        order_collection.insert_one(order)
+        return True
+    except Exception as e:
+        print(f"Error: {e}")
+        return False
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=8001,debug=True)
