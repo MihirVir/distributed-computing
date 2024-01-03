@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: email
+  template:
+    metadata:
+      labels:
+        app: email
+    spec:
+      containers:
+        - name: email
+          image: mihirvir10/email
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MONGO_HOST
+              value: mongo-cluster-ip-service
+            - name: MONGO_PORT
+              value: "27017"
+            - name: JWT_SECRET
+              value: "123TEST"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: email-srv
+spec:
+  selector:
+    app: email
+  ports:
+    - name: email
+      port: 8000
+      targetPort: 8000
+      protocol: TCP

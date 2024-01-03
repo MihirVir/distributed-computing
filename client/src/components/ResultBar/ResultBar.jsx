@@ -12,6 +12,13 @@ const ResultBar = (props) => {
   const dispatch = useDispatch();
   const sort_by = useSelector((state) => state.filter.sort_by);
   const { searchResults } = props;
+  const handleCreateOrder = () => {
+    const orderData = {
+      userId: userId,
+      flightMap: selectedFlights // 使用用户选择的航班信息
+    };
+    dispatch(createOrder(orderData));
+  };
   
   const handleOptionSelected = (e) => {
     dispatch(setSortOption(e.target.value));
@@ -30,7 +37,8 @@ const ResultBar = (props) => {
             </select>
           </div>
         </div>
-        
+         {/* 添加创建订单的按钮 */}
+      <button onClick={handleCreateOrder}>Create Order</button>
     </div>
   );
 }

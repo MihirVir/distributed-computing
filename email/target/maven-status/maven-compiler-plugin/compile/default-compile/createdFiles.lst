@@ -1,0 +1,10 @@
+com\yl\email\sendEmail\MongoConfig.class
+com\yl\email\sendEmail\VerificationCodeServiceImpl.class
+com\yl\email\sendEmail\Response.class
+com\yl\email\sendEmail\SendCodeService.class
+com\yl\email\sendEmail\VerificationCodeService.class
+com\yl\email\sendEmail\LoginController.class
+com\yl\email\sendEmail\SendCodeServiceImpl.class
+com\yl\email\sendEmail\Mail$1.class
+com\yl\email\sendEmail\Mail.class
+com\yl\email\EmailApplication.class

@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit"
 import searchReducer from "./search/search_slice";
 import filterReducer from "./filter/filter_slice";
 import userReducer from "./user/user_slice";
+import orderReducer from './order/order_slice'; // 导入订单 reducer
+
 /*
     used for global state management
     
@@ -17,5 +19,6 @@ export const store = configureStore({
         search: searchReducer,
         filter: filterReducer,
         user: userReducer
+        order: orderReducer
     }
 });
