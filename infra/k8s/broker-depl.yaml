@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broker-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broker
+  template:
+    metadata:
+      labels:
+        app: broker
+    spec:
+      containers:
+        - name: broker
+          image: navjots20/broker:latest
+          ports:
+            - containerPort: 8021
+          env:
+            - name: MONGO_HOST
+              value: mongo-cluster-ip-service
+            - name: MONGO_PORT
+              value: "27017"
+            - name: JWT_SECRET
+              value: "123TEST"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: broker-srv
+spec:
+  selector:
+    app: broker
+  ports:
+    - name: broker
+      port: 8021
+      targetPort: 8021
+      protocol: TCP
