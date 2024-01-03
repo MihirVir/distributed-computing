@@ -1,0 +1,17 @@
+FROM python:3.10
+
+WORKDIR /app
+
+COPY . /app
+
+RUN pip install --no-cache-dir Flask
+RUN pip install pymongo
+RUN pip install countryinfo
+RUN pip install geopy
+RUN pip install pika
+
+ENV PYTHONUNBUFFERED=1
+
+EXPOSE 8002
+
+CMD ["python", "init_airline2_db.py"]

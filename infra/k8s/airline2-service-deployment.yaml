@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airline2-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airline2-service
+  template:
+    metadata:
+      labels:
+        app: airline2-service
+    spec:
+      containers:
+      - name: airline2-service
+        image: jettzgg/airline2-service:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8002
+        env:
+          - name: MONGO_HOST
+            value: mongo-cluster-ip-service
+          - name: MONGO_PORT
+            value: "27017"
+
