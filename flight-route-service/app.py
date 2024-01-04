@@ -201,14 +201,14 @@ def flight_routes():
     for row in motifs.rdd.collect():
 
         flight_routes.append({"src":{"id":row.a['id'],"name":row.a['name']}, "layover":{"id":row.b['id'],"name":row.b['name']}, "dest":{"id":row.c['id'],"name":row.c['name']},
-                               "flights":[{"flight_no" : row.e['_id'],"airline": row.e['_id'],"rating": row.e['rating']},{"flight_no" : row.e2['_id'],"airline": row.e2['airline'],"rating": row.e2['rating']}],
+                               "flights":[{"flight_no" : row.e['_id'],"airline": row.e['airline'],"rating": row.e['rating']},{"flight_no" : row.e2['_id'],"airline": row.e2['airline'],"rating": row.e2['rating']}],
                                "price" : (int(row.e["price"]) + int(row.e2["price"]))*rate, "type" : "layover"        
                                })
     motifs = tripGraph.find("(a)-[e]->(b)").filter("a.id == '{}' and b.id == '{}'".format(src,dest))
     for row in motifs.rdd.collect():
 
         flight_routes.append({"src":{"id":row.a['id'],"name":row.a['name']}, "dest":{"id":row.b['id'],"name":row.b['name']},
-                               "flights":[{"flight_no" : row.e['_id'],"airline": row.e['_id'],"rating": row.e['rating']}],
+                               "flights":[{"flight_no" : row.e['_id'],"airline": row.e['airline'],"rating": row.e['rating']}],
                                "price" : int(row.e["price"])*rate, "type" : "direct"        
                                })       
     return jsonify(flight_routes)
