@@ -40,7 +40,15 @@ def get_flights():
     flights = flight_collection.find({}, {'_id': 0})
     flights_list = list(flights)
     for flight in flights_list:
-        send_flight_info_to_queue(str(flight))
+        message = {
+            "flight_no": flight["flight_no"],
+            "airline": flight["airline"]["name"],
+            "src": flight["src"]["id"],
+            "dst": flight["dest"]["id"],
+            "price": flight["price"],
+            "rating": flight["airline"]["rating"]
+        }
+        send_flight_info_to_queue(json.dumps(message))
     return jsonify(flights_list)
 
 # get specific flight info
@@ -106,7 +114,7 @@ def send_flight_info_to_queue(flight_info):
         channel.basic_publish(exchange=rabbitmq_exchange,
                               routing_key=rabbitmq_routing_key,
                               body=flight_info)
-        print(f" [x] Sent {flight_info} to {rabbitmq_exchange}")
+        print(f" [Airline1 service] Sent {flight_info} to {rabbitmq_queue}")
     except pika.exceptions.AMQPConnectionError as err:
         print(f"Error connecting to RabbitMQ: {err}")
         # Reconnection logic or error handling
