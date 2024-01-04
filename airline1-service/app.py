@@ -20,8 +20,8 @@ connection = pika.BlockingConnection(connection_parameters)
 channel = connection.channel()
 
 # Declare the queue
-channel.exchange_declare(exchange=rabbitmq_exchange, exchange_type='direct')
-channel.queue_declare(queue=rabbitmq_queue)
+channel.exchange_declare(exchange=rabbitmq_exchange, exchange_type='direct', durable=True)
+channel.queue_declare(queue=rabbitmq_queue,durable=True)
 channel.queue_bind(queue=rabbitmq_queue, exchange=rabbitmq_exchange, routing_key=rabbitmq_routing_key)
 
 # Read MongoDB host and port from environment variables or use default values
