@@ -1,5 +1,5 @@
 .card-wrap {
-    width: 60%;
+    width: 65%;
     margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -11,6 +11,7 @@
     color: white;
     border-radius: .75rem;
     height: 17%;
+    padding: .5rem;
     width: 75%;
     display: flex;
     align-items: center;
@@ -124,4 +125,25 @@
 .info-imp > span {
     color: red;
     margin-right: 2px;
+}
+
+.airline-name {
+    font-size: .75rem;
+}
+.airline-rating {
+    background-color: white;
+    color: black;
+    padding: .2rem;
+    font-size: .9rem;
+}
+.ratings-container {
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
+    flex-direction: column;
+}
+.rating-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

@@ -1,5 +1,7 @@
 from flask import Flask, request, make_response, jsonify
+import requests
 from pymongo import MongoClient
+import urllib.parse
 from pymongo.errors import ConnectionFailure
 import bcrypt
 import datetime
@@ -68,8 +70,18 @@ def register_user():
                 response = make_response(jsonify({
                     "message": "User Successfully created",
                     "user": user,
-                    "link": f"localhost/api/v1/user/active?token={token}"
+                    "link": f"localhost/activate?token={token}"
                 }))
+
+                email_endpoint = f"http://email-srv:7999/api/v1/email/send"
+                params = {
+                    "email": email,
+                    "subject": "validation",
+                    "msg": f"http://localhost/activate?token={token}"
+                }
+                response_email = requests.post(email_endpoint, params=params)
+
+                print(response_email)
                 
                 return response
             
@@ -97,10 +109,10 @@ def login_user():
                     "message": "User not found"
                 })
         
-            # if user.get("active") == False:
-            #     return jsonify({
-            #         "message": "Please click on the verfication link provided in the email"
-            #     })
+            if user.get("active") == False:
+                return jsonify({
+                    "message": "Please click on the verfication link provided in the email"
+                })
             
             stored_password = user.get("password")
             is_matching_pass = bcrypt.checkpw(password.encode("UTF-8"), stored_password.encode("UTF-8"))
