@@ -25,6 +25,16 @@ spec:
                 name: flight-routes-cluster-ip-service
                 port:
                   number: 8000
+          - path: /broker_service/api/v1/order/?(.*)
+            # UPDATE PATH
+            pathType: ImplementationSpecific
+            # ADD PATHTYPE
+            backend:
+              service:
+                # UPDATE SERVICE FIELDS
+                name: broker-srv
+                port:
+                  number: 8021
           - path: /api/v1/user/?(.*)
             pathType: ImplementationSpecific
             backend:
