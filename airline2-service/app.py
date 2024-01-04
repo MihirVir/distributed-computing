@@ -8,8 +8,8 @@ from bson import json_util
 app = Flask(__name__)
 
 # Set RabbitMQ connection details with environment variables or default values
-rabbitmq_host = os.getenv('RABBITMQ_HOST', 'rabbitmq')
-rabbitmq_port = int(os.getenv('RABBITMQ_SERVICE_PORT', 5672))
+rabbitmq_host = 'rabbitmq'
+rabbitmq_port = 5672
 rabbitmq_exchange = 'flight.exchange'
 rabbitmq_queue = 'flight.queue'
 rabbitmq_routing_key = 'flight'
@@ -95,14 +95,24 @@ def update_flight_prices():
 # send flight info to RabbitMQ queue
 def send_flight_info_to_queue(flight_info):
     global connection, channel
-    if connection.is_closed:
-        connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_host))
-        channel = connection.channel()
+    try:
+        if connection.is_closed:
+            connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_host))
+            channel = connection.channel()
+            channel.exchange_declare(exchange=rabbitmq_exchange, exchange_type='direct', durable=True)
+            channel.queue_declare(queue=rabbitmq_queue,durable=True)
+            channel.queue_bind(queue=rabbitmq_queue, exchange=rabbitmq_exchange, routing_key=rabbitmq_routing_key)
 
-    channel.basic_publish(exchange=rabbitmq_exchange,
-                          routing_key=rabbitmq_routing_key,
-                          body=flight_info)
-    print(f" [x] Sent {flight_info} to {rabbitmq_exchange}")
+        channel.basic_publish(exchange=rabbitmq_exchange,
+                              routing_key=rabbitmq_routing_key,
+                              body=flight_info)
+        print(f" [x] Sent {flight_info} to {rabbitmq_exchange}")
+    except pika.exceptions.AMQPConnectionError as err:
+        print(f"Error connecting to RabbitMQ: {err}")
+        # Reconnection logic or error handling
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        # General error handling
 
 @app.route('/api/v1/airline2-service/orders/payment-success', methods=['POST'])
 def payment_success():
