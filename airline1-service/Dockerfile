@@ -18,4 +18,4 @@ ENV PYTHONUNBUFFERED=1
 EXPOSE 8001
 
 # Define the command to run your application
-CMD ["python", "app.py"]
+CMD sleep 10; python app.py
