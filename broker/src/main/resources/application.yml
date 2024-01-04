@@ -17,11 +17,11 @@ spring:
       socket-timeout: 10000
 api:
   flight:
-    airline1: http://127.0.0.1:8021/test1/
-    airline2: http://127.0.0.1:8021/test2/
+    airline1: http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights/
+    airline2: http://airline2-service-cluster-ip-service:8002/api/v1/airline2-service/flights/
   pay:
-    airline1: http://127.0.0.1:8021/test3
-    airline2: http://127.0.0.1:8021/test4
+    airline1: http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/orders/payment-success
+    airline2: http://airline2-service-cluster-ip-service:8002/api/v1/airline2-service/orders/payment-success
 
 async:
   executor:
