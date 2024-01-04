@@ -30,9 +30,9 @@ spark
 # MongoDB connection details
 mongo_host = os.environ["MONGO_HOST"]
 mongo_port = int(os.environ["MONGO_PORT"])
-database_name = 'mydatabase'
+database_name = 'flight_agent'
 collection_name = 'countries'
-trip_collection_name = 'trips'
+trip_collection_name = 'flights'
 user_activity_collection_name = 'user_activity'
 airline_collection_name = 'airlines'
 
@@ -56,48 +56,51 @@ for country in pycountry.countries:
 
 collection.insert_many(countries_data)
 
-trip_collection.delete_many({})
+# trip_collection.delete_many({})
 
-trips_data = [
-    {
-        "src": "IND",
-        "dest": "IRL",
-        "flight_no": "lol1",  
-        "airline" : "emirates",
-        "price": 500,
-        "rating" : 4.0
-    },
-    {
-        "src": "IRL",
-        "dest": "CHN",
-        "flight_no": "lol3",
-        "airline": "emirates",    
-        "price" : 200,
-        "rating" : 4.5
-    },
-    {
-        "src": "IRL",
-        "dest": "CHN",
-        "flight_no": "RNDB",
-        "airline": "eithad",    
-        "price" : 400,
-        "rating" : 2.2
-    },
-    {
-        "src": "IND",
-        "dest": "CHN",
-        "flight_no": "ZRQN",
-        "airline": "emirates",    
-        "price" : 200,
-        "rating" : 3.6
-    }
-]
+# trips_data = [
+#     {
+#         "src": "IND",
+#         "dest": "IRL",
+#         "flight_no": "lol1",  
+#         "airline" : "emirates",
+#         "price": 500,
+#         "rating" : 4.0
+#     },
+#     {
+#         "src": "IRL",
+#         "dest": "CHN",
+#         "flight_no": "lol3",
+#         "airline": "emirates",    
+#         "price" : 200,
+#         "rating" : 4.5
+#     },
+#     {
+#         "src": "IRL",
+#         "dest": "CHN",
+#         "flight_no": "RNDB",
+#         "airline": "eithad",    
+#         "price" : 400,
+#         "rating" : 2.2
+#     },
+#     {
+#         "src": "IND",
+#         "dest": "CHN",
+#         "flight_no": "ZRQN",
+#         "airline": "emirates",    
+#         "price" : 200,
+#         "rating" : 3.6
+#     }
+# ]
 
-trip_collection.insert_many(trips_data)
+# trip_collection.insert_many(trips_data)
 
 
 def update_airline_rating(request_data):
-    airlines = {"airline1": "http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights/update-prices"}
+    airlines = {
+        "airline1": "http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights/update-prices",
+        "airline2": "http://airline2-service-cluster-ip-service:8002/api/v1/airline1-service/flights/update-prices",
+        }
     time.sleep(1)
     rating = request_data.get("rating")
     airline = request_data.get("airline")
