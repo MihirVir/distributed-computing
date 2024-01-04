@@ -1,13 +1,14 @@
 package Main.sendEmail;
 
 import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+
 
 /**
  * ClassName Main.Main.sendEmail.LoginController
@@ -77,4 +78,21 @@ public class LoginController {
         }
     }
 
+    @PostMapping("/send")
+    public Response sendCustomMail(@RequestParam("email") String email, @RequestParam("subject") String subject, @RequestParam("msg") String msg) {
+        System.out.println(email);
+        System.out.println(subject);
+        System.out.println(msg);
+        Response res = new Response();
+        try {
+            sendCodeService.sendCustomEmail(email, subject, msg);
+            res.setStatus(200);
+            res.setMessage("Successfully sent the email");
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.setStatus(500);
+            res.setMessage("Internal Server Error" + e.getMessage());
+        }
+        return res;
+    }
 }

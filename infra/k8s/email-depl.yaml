@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: email
-          image: navjots20/email:latest
+          image: mihirvir10/email:latest
           ports:
             - containerPort: 7999
           env:

@@ -31,6 +31,9 @@ public class SendCodeServiceImpl implements SendCodeService {
 //        redisTemplate.opsForValue().set(email, code, CODE_TTL, TimeUnit.SECONDS);
     }
 
-
+    @Override
+    public void sendCustomEmail(String email, String subject, String msg) throws MessagingException {
+        Mail.sendCustomMail(email, subject, msg);
+    }    
 }
 

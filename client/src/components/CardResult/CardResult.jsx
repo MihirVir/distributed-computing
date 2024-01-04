@@ -8,6 +8,7 @@ const CardResult = (props) => {
     const sort_by = useSelector((state) => state.filter.sort_by);
 
     const sortSearchResults = () => {
+        // copy of search results
         let sorted = [...searchResults];
 
         switch(sort_by) {
@@ -65,7 +66,17 @@ const CardResult = (props) => {
                             <div className="pricing-information">
                                 <p className = "deals" >2 deals from</p>
                                 <p className = "price">EUR{item.price}</p>
-                                <button className = "add-to-cart-btn">Select</button>
+                                <button onClick = {() => {console.log(item)}} className = "add-to-cart-btn">Select</button>
+                            </div>
+                            <div>
+                                <div>
+                                    <span className="airline-name">Emirates</span>
+                                    <span className = "airline-rating">5</span>
+                                </div>
+                                <div>
+                                    <span className = "airline-name">Etihad</span>
+                                    <span className = "airline-rating">4</span>
+                                </div>
                             </div>
                         </div>
                     </>

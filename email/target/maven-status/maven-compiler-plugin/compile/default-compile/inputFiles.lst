@@ -1,6 +1,7 @@
 /Users/mihir/distributed-computing/email/src/main/java/Main/EmailApplication.java
 /Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/LoginController.java
 /Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/VerificationCodeService.java
+/Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/MessageFormat.java
 /Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/SendCodeService.java
 /Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/Response.java
 /Users/mihir/distributed-computing/email/src/main/java/Main/sendEmail/Mail.java

@@ -107,4 +107,47 @@ public class Mail {
         }
         return sb.substring(3, 8);
     }
+
+    public static void sendCustomMail(String email, String subject, String msg) throws MessagingException {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true"); 
+        
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        
+        props.put("mail.smtp.port", "587");
+        
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        
+        props.put("mail.user", "navjot2454@gmail.com");
+        
+        props.put("mail.password", "zevt gqeq yrvw fuzl");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        
+        // Build authentication information for SMTP authentication
+        Authenticator authenticator = new Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                String userName = props.getProperty("mail.user");
+                String password = props.getProperty("mail.password");
+                return new PasswordAuthentication(userName, password);
+            }
+        };
+        
+        Session mailSession = Session.getInstance(props, authenticator);
+        
+        MimeMessage message = new MimeMessage(mailSession);
+        
+        InternetAddress form = new InternetAddress(props.getProperty("mail.user"));
+        message.setFrom(form);
+        
+        InternetAddress to = new InternetAddress(email);
+        message.setRecipient(Message.RecipientType.TO, to);
+        
+        message.setSubject(subject);
+        
+        message.setContent(
+                "Click on the link to send the activate your account: " + msg, "text/html;charset=UTF-8");
+
+        Transport.send(message); 
+    }
 }

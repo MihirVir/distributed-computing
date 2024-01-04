@@ -25,8 +25,6 @@ const ResultBar = (props) => {
               <option value="">Sort by</option>
               <option value="ascending">Price: Low - High</option>
               <option value="descending">Price: High - Low</option>
-              <option value="rating-descending">Rating: Best</option>
-              <option value="rating-ascending">Rating: Worst</option>
             </select>
           </div>
         </div>
