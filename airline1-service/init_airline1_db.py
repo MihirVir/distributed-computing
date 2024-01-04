@@ -38,7 +38,7 @@ for src_country in countries:
                 if src_country_info.iso(3) != dest_country_info.iso(3):
                     try:
                         dest_continent = dest_country_info.region()
-                        if dest_continent and ((src_continent == 'Asia' and dest_continent in ['Asia', 'Europe', 'North America']) or (src_continent in ['Europe', 'North America'] and dest_continent == 'Asia')):
+                        if dest_continent and ((src_continent == 'Asia' and dest_continent == 'Asia')):
                                 src_location = src_country_info.latlng()
                                 dest_location = dest_country_info.latlng()
 
