@@ -107,12 +107,15 @@ def update_airline_rating(request_data):
     
     flight = airline_collection.find_one({"airline":airline})
     if flight == None:
+        airline_collection.insert_one({"airline":airline})
         flight={}
+
     rating_count = flight.get("rating_count",0)
-    new_rating = round((flight.get("rating",0)*rating_count + rating)/(rating_count+1),1)
+    new_rating = round((flight.get("rating",0)*rating_count + rating)/(rating_count+1),2)
     airline_collection.update_one({"airline":airline},{"$set":{"rating":new_rating,"rating_count":rating_count+1}})
+    trip_collection.update_many({"airline":airline},{"$set":{"rating":new_rating}})
     url = airlines.get(airline, "http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights/update-prices")
-    body = {"rating":rating}
+    body = {"rating":new_rating}
     headers = {'Content-Type': 'application/json'}
     response = requests.post(url,data = json.dumps(body),headers=headers)
 
@@ -194,12 +197,11 @@ def flight_routes():
     trip_df = spark.createDataFrame(data, schema=schema)
 
     tripGraph = GraphFrame(df, trip_df)
-    print(tripGraph.edges)
     flight_routes = []
     motifs = tripGraph.find("(a)-[e]->(b); (b)-[e2]->(c)").filter("a.id == '{}' and c.id == '{}'".format(src,dest))
     rate = get_user_price_rate(user_id)
     for row in motifs.rdd.collect():
-
+        print(row.e['rating'])
         flight_routes.append({"src":{"id":row.a['id'],"name":row.a['name']}, "layover":{"id":row.b['id'],"name":row.b['name']}, "dest":{"id":row.c['id'],"name":row.c['name']},
                                "flights":[{"flight_no" : row.e['_id'],"airline": row.e['airline'],"rating": row.e['rating']},{"flight_no" : row.e2['_id'],"airline": row.e2['airline'],"rating": row.e2['rating']}],
                                "price" : (int(row.e["price"]) + int(row.e2["price"]))*rate, "type" : "layover"        
