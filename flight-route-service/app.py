@@ -110,8 +110,8 @@ def update_airline_rating(request_data):
         airline_collection.insert_one({"airline":airline})
         flight={}
 
-    rating_count = flight.get("rating_count",0)
-    new_rating = round((flight.get("rating",0)*rating_count + rating)/(rating_count+1),2)
+    rating_count = flight.get("rating_count",1)
+    new_rating = round((flight.get("rating",4.25)*rating_count + rating)/(rating_count+1),2)
     airline_collection.update_one({"airline":airline},{"$set":{"rating":new_rating,"rating_count":rating_count+1}})
     trip_collection.update_many({"airline":airline},{"$set":{"rating":new_rating}})
     url = airlines.get(airline, "http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights/update-prices")
