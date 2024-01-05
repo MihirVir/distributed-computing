@@ -146,7 +146,7 @@ public class Mail {
         message.setSubject(subject);
         
         message.setContent(
-                "Click on the link to send the activate your account: " + msg, "text/html;charset=UTF-8");
+                "Click this to activate your account: " + msg, "text/html;charset=UTF-8");
 
         Transport.send(message); 
     }

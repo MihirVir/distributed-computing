@@ -1,0 +1,43 @@
+.review-main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.review-contains {
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.rating-style {
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 900;
+    border: 3px solid black;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.submit-review {
+    background-color: black;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 1rem;
+}
+
+.rating-style:hover {
+    background-color: black;
+    color: white;
+}
+.rating-style.active-rating {
+    background-color: black;
+    color: white;
+}

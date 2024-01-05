@@ -11,6 +11,7 @@ import Login from './pages/Login/Login'
 import Order from './pages/Order/Order'
 import Activate from './pages/Activate/Activate'
 import "./app.css"
+import Review from './pages/Review/Review'
 /*
   creating multi paged application with react router dom 
  */
@@ -25,6 +26,7 @@ const App = () => {
                 <Route exact path = "/login" element = {<Login />} /> 
                 <Route exact path = "/order" element = {<Order />} />
                 <Route exact path = "/activate" element = {<Activate />} />
+                <Route exact path = "/review" element = {<Review />}  />
             </Routes>
         </BrowserRouter>
     </>

@@ -9,7 +9,8 @@
 .links {
     width: 20%;
     justify-content: space-around;
-    display: flex;  
+    display: flex; 
+    align-items: center; 
 }
 
 .links > li {

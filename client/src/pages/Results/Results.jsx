@@ -1,44 +1,36 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Navigator from '../../components/Navigator/Navigator';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import ResultBar from '../../components/ResultBar/ResultBar';
 import CardResult from '../../components/CardResult/CardResult';
+import {
+  setData
+} from "../../state/user/user_slice";
 import "./results.css";
-// searchResults: [
-//   {
-//     dest: {
-//       id: 'CHN',
-//       name: 'China'
-//     },
-//     flights: [
-//       {
-//         airline: 'lol1',
-//         flight_no: 'lol1'
-//       },
-//       {
-//         airline: 'lol2',
-//         flight_no: 'lol2'
-//       }
-//     ],
-//     layover: {
-//       id: 'IRL',
-//       name: 'Ireland'
-//     },
-//     price: 700,
-//     src: {
-//       id: 'IND',
-//       name: 'India'
-//     },
-//     type: 'layover'
-//   }
-// ],
+
 const Results = () => {
+  const dispatch = useDispatch();
+  const [user, setUser] = useState(false);
   const searchResults = useSelector((state) => state.search.searchResults);
-  
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get("http://localhost/api/v1/user/current-user")
+
+      dispatch(setData(res.data));
+
+      setUser(true);
+    }catch(err) {
+      console.log(err);
+    }
+  }  
+  useEffect(() => {
+    fetchUser();
+  }, []) 
   return (
     <>
         <header className = "results-header">
-            <Navigator />
+            <Navigator user = {user}/>
         </header>
         <main className = "results-main">
           <div className= "result-main-wrapper" >

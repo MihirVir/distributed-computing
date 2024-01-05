@@ -45,7 +45,7 @@ def register_user():
                 if existing_user:
                     return jsonify({
                         "message": "User already exists"
-                    })
+                    }), 400
                 
                 # algorithm used HS256
                 hashed_password = bcrypt.hashpw(password.encode("UTF-8"), bcrypt.gensalt())
@@ -100,19 +100,19 @@ def login_user():
             if not email or not password:
                 return jsonify({
                     "message": "email or password is not provided"
-                })
+                }), 400
 
             user = collection.find_one({ "email": email })
 
             if not user:
                 return jsonify({
                     "message": "User not found"
-                })
+                }), 400
         
             if user.get("active") == False:
                 return jsonify({
                     "message": "Please click on the verfication link provided in the email"
-                })
+                }), 400
             
             stored_password = user.get("password")
             is_matching_pass = bcrypt.checkpw(password.encode("UTF-8"), stored_password.encode("UTF-8"))
@@ -120,7 +120,7 @@ def login_user():
             if not is_matching_pass:
                 return jsonify({
                     "message": "invalid username or password"
-                })
+                }), 401
             token = jwt.encode({"email": email, "active": user["active"],"exp": datetime.datetime.utcnow() + datetime.timedelta(hours=10)}, secret)
             
             response = make_response(jsonify({
@@ -206,5 +206,10 @@ def user_active():
     else:
         return jsonify({ "message": "No Token Provided"}), 400
 
+@app.route("/api/v1/user/logout", methods = ["POST"])
+def clear_cookie():
+    response = make_response("Cookie 'token' is cleared")
+    response.set_cookie("token", '', expires = 0)
+    return response
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)

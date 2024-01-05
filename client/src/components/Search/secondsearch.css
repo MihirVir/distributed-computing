@@ -103,5 +103,6 @@ input[type="date"] {
     outline: none;
     background-color: #2563eb;  
     color: white;
+    cursor: pointer;
     margin-left: 1rem;
 }

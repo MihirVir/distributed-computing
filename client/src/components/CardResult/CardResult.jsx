@@ -1,7 +1,7 @@
 import React, {useEffect, useState}  from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setOrderId } from '../../state/order/order_slice';
+import { setOrderId, setAirlineName, setTicketPrice } from '../../state/order/order_slice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
@@ -52,13 +52,16 @@ const CardResult = (props) => {
             const response = await axios.post("http://localhost/broker_service/api/v1/order/create",body_data);
 
             dispatch(setOrderId(response.data.result.order_id));
-
+            dispatch(setAirlineName(response.data.result.flights_info[0].airline));
+            dispatch(setTicketPrice(response.data.result.price));
+            console.log(response.data);
             toast.success("successfully created the order", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 2000
             });
-
-            history("/order");
+            setTimeout(() => {
+                history("/order");
+            }, 2200)
         } catch (err) {
             console.error(err);
             toast.error("error creating the order", {

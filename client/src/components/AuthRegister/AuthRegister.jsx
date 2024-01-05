@@ -3,16 +3,21 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./index.css"
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const AuthRegister = () => {
   const history = useNavigate();
   const [isText, setIsText] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
         const res = await axios.post("http://localhost/api/v1/user/register", {
             name: name,
@@ -21,16 +26,29 @@ const AuthRegister = () => {
         })
 
         if (res.status === 201 || res.status === 200) {
-            history("/login")
+            toast.success("Sent an email to your account click the link to activate it", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 1900
+            })
+            setIsLoading(false)
+            setTimeout(() => {
+                history("/login")
+            }, 2100)
         }
     } catch (err) {
+        setIsLoading(false)
         console.log(err);
+        toast.error("Error register the user or user already exists", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000
+        })
     }
   }
-  console.log(name + " " + email + " " + password);
+  
   return (
     <>
         <div className="auth-card-comp">
+            <ToastContainer />
             <h2>Register</h2>
             <form className = "register-auth-form" onSubmit={handleSubmit}>
                 <input onChange = {(e) => setName(e.target.value)} className = "auth-text" type="text" value = {name} name="" id="" placeholder = "name"/>
@@ -41,7 +59,9 @@ const AuthRegister = () => {
                         {isText ? <FaRegEyeSlash /> : <FaEye />}
                     </span>
                 </div>
-                <button className = "register-btn">REGISTER</button>
+                <button disabled = {isLoading} className = "register-btn">
+                    {isLoading ? <LoadingSpinner /> : "REGISTER"}
+                </button>
             </form>
         </div>
     </>

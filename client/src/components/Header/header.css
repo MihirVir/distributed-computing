@@ -20,6 +20,7 @@
     display: flex;
     width: 15%;
     justify-content: space-around;
+    align-items: center;
 }
 
 .nav-links li {
@@ -38,4 +39,17 @@
 
 .nav-links li:hover::after {
     width: 100%;
+}
+
+.nav-links-li {
+    color: white;
+    text-decoration: none;
+}
+
+.logout-btn {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: .5rem;
+    padding: .75rem;
+    color: white;
 }

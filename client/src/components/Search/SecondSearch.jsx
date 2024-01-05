@@ -18,6 +18,7 @@ import {
     setToResultsActive
   } from "../../state/search/search_slice";
 import Loading from '../Loading/Loading';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 // preventing unnecessary re renders when the props are same
 const SecondSearch = React.memo(() => {
@@ -117,7 +118,7 @@ const SecondSearch = React.memo(() => {
                             <input onChange = {(e) => {dispatch(setFrom(e.target.value)); dispatch(setFromResultsActive(true))}} value = {from} required type="text" className = "search-text" placeholder='current location'/>
                         </div>
                         {(fromResults.length > 0 && fromResultsActive) && (<div className="results-container">
-                            {fromResults.map((item, idx) => {
+                            {fromResults.slice(0, 4).map((item, idx) => {
                                 return (
                                     <>
                                         <p onClick = {() => handleFromResultsClick(item)} key = {idx} className="results">{item}</p>
@@ -131,7 +132,7 @@ const SecondSearch = React.memo(() => {
                             <input onChange = {(e) => {dispatch(setTo(e.target.value)); dispatch(setToResultsActive(true))}} value = {to} required type="text" className = "search-text" placeholder='Destination'/>
                         </div>
                         {(toResults.length > 0 && toResultsActive) && (<div className="results-container left">
-                            {toResults.map((item, idx) => {
+                            {toResults.slice(0, 4).map((item, idx) => {
                                 return (
                                     <>
                                         <p onClick = {() => handleToResultsClick(item)} key = {idx} className = "results">{item}</p>
@@ -152,7 +153,9 @@ const SecondSearch = React.memo(() => {
                             </label>
                             <input type="date" />
                         </div>}
-                        <button className = "search-btn">Search</button>
+                        <button disabled={searchLoading} className = "search-btn">
+                            {searchLoading ? <LoadingSpinner /> : "Search"}
+                        </button>
                     </form>
                 </div>
             </div>
