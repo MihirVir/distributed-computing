@@ -1,4 +1,18 @@
 # COMP41720-Distributed Systems-Group - 19
+
+
+## Github Link
+
+https://github.com/MihirVir/distributed-computing
+
+## Report Link
+
+https://docs.google.com/document/d/1mXdZri6jRNGjl3tnv9xitVzOJXsQ2QZ6cSfAtF0UXQI/edit
+
+## Video Link
+https://www.youtube.com/watch?v=-vYRQ_9RgiU
+
+
 # Installation Guide
 
 Follow these steps to get the app up and running on machine:

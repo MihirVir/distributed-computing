@@ -1,0 +1,41 @@
+server:
+  port: 8021
+spring:
+  application:
+    name: broker
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+  data:
+    mongodb:
+      uri: mongodb://mongo-cluster-ip-service:27017/flight_agent
+      retry:
+        maxAttempts: 3
+      socket-timeout: 10000
+api:
+  flight:
+    airline1: http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights/
+    airline2: http://airline2-service-cluster-ip-service:8002/api/v1/airline2-service/flights/
+  pay:
+    airline1: http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/orders/payment-success
+    airline2: http://airline2-service-cluster-ip-service:8002/api/v1/airline2-service/orders/payment-success
+
+async:
+  executor:
+    thread:
+      core_pool_size: 3
+      max_pool_size: 6
+      queue_capacity: 100
+      keep_alive_seconds: 300
+      thread_name_prefix: Async-Service-
+
+order:
+  expire-time: 30000
+
+
+
+
+
