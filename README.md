@@ -8,7 +8,6 @@ Make sure you have the following installed:
 
 - Docker Desktop
 - Git
-- Skaffold [https://skaffold.dev/docs/install/] (Mac needs homebrew)
 - docker desktop kubernetes [Settings -> Kubernetes -> Apply and Restart]
 - make sure you have enough resources allocated to your kubernetes cluster
      - Go to docker desktop [settings -> resources]
