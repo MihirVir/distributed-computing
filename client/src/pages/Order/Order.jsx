@@ -8,7 +8,8 @@ import "./order.css";
 const Order = () => {
   const history = useNavigate();
   const orderId = useSelector((state) => state.order.orderId);
-
+  const airlineName = useSelector((state) => state.order.airlineName)
+  const ticketPrice = useSelector((state) => state.order.ticketPrice);
   const handlePurchase = async () => {
     try {
         const body = {
@@ -24,7 +25,7 @@ const Order = () => {
         });
 
         setTimeout(() => {
-            history("/")
+            history("/review")
         }, 2000)
     } catch (err) {
         console.log(err);
@@ -37,7 +38,11 @@ const Order = () => {
   return (
     <main className = "order-main">
         <ToastContainer />
-        <button onClick = {handlePurchase} className = "place-order">Place Order</button>
+        <div className="purchase-container">
+            <h3>{airlineName}</h3>
+            <h4>Price: EUR{ticketPrice}</h4>
+            <button onClick = {handlePurchase} className = "place-order">Place Order</button>
+        </div>
     </main>
   )
 }
