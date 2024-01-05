@@ -2,6 +2,7 @@ from countryinfo import CountryInfo
 from geopy.distance import great_circle
 import pymongo
 import os
+import requests
 
 # Read MongoDB host and port from environment variables or use default values
 mongo_host = os.getenv('MONGO_HOST', 'mongo-cluster-ip-service')
@@ -63,7 +64,19 @@ for src_country in countries:
     except KeyError:
         continue
 
+def trigger_flight_info_api():
+    try:
+        url = 'http://airline1-service-cluster-ip-service:8001/api/v1/airline1-service/flights'
+        response = requests.get(url)
+        if response.status_code == 200:
+            print("Successfully triggered the flight info API.")
+        else:
+            print(f"Failed to trigger the API, status code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"HTTP Request failed: {e}")
+
 # insert data to the database
 flights_collection.insert_many(flights_data)
 mongo_client.close()
 print(f"Inserted {len(flights_data)} flight records into the database.")
+trigger_flight_info_api()

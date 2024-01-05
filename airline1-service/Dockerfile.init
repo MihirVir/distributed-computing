@@ -9,6 +9,7 @@ RUN pip install pymongo
 RUN pip install countryinfo
 RUN pip install geopy
 RUN pip install pika
+RUN pip install requests
 
 ENV PYTHONUNBUFFERED=1
 
