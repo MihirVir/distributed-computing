@@ -117,10 +117,18 @@ def send_flight_info_to_queue(flight_info):
         print(f" [airline2 service] Sent {flight_info} to {rabbitmq_queue}")
     except pika.exceptions.AMQPConnectionError as err:
         print(f"Error connecting to RabbitMQ: {err}")
-        # Reconnection logic or error handling
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_host))
+        channel = connection.channel()
+        channel.exchange_declare(exchange=rabbitmq_exchange, exchange_type='direct', durable=True)
+        channel.queue_declare(queue=rabbitmq_queue, durable=True)
+        channel.queue_bind(queue=rabbitmq_queue, exchange=rabbitmq_exchange, routing_key=rabbitmq_routing_key)
+        
+        channel.basic_publish(exchange=rabbitmq_exchange,
+                              routing_key=rabbitmq_routing_key,
+                              body=flight_info)
+        print(f" [Airline1 service] Sent {flight_info} to {rabbitmq_queue} after reconnecting")
     except Exception as e:
         print(f"Unexpected error: {e}")
-        # General error handling
 
 @app.route('/api/v1/airline2-service/orders/payment-success', methods=['POST'])
 def payment_success():

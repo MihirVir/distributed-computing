@@ -64,7 +64,7 @@ for src_country in countries:
     except KeyError:
         continue
 
-def trigger_flight_info_api():
+def trigger_flights_api():
     try:
         url = 'http://airline2-service-cluster-ip-service:8002/api/v1/airline2-service/flights'
         response = requests.get(url)
@@ -79,4 +79,4 @@ def trigger_flight_info_api():
 flights_collection.insert_many(flights_data)
 mongo_client.close()
 print(f"Inserted {len(flights_data)} flight records into the database.")
-trigger_flight_info_api()
+trigger_flights_api()
