@@ -16,8 +16,9 @@ Make sure you have the following installed:
             - 6500 Memory
             - Disksize 200G+ 
             - swap 2GB
-
-### Using Docker Desktop Kubernetes 
+- minikube
+# Method 1
+## Using Docker Desktop Kubernetes 
 - Go to Project root directory
 - Assuming you are using docker desktop kubernetes you will need to apply the following command to enable ingress-nginx-controller in your machine to make sure the load balancer
   is working correctly
@@ -25,7 +26,7 @@ Make sure you have the following installed:
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
   ```
   You will see many kubernetes objects getting created in your terminal
-- After running the above commadn, type the following command to spin up all the services
+- After running the above command, type the following command to spin up all the services
   ```bash
       kubectl apply -f /infra/k8s/
   ```
@@ -45,4 +46,28 @@ Make sure you have the following installed:
   Successfully triggered the flight info API.
 - After seeing the above log statements you can access the Application via this link
     http://localhost/
-
+# Method 2 
+## Using minikube
+- Make sure you have 6 CPUs, 6500 memory and 200G+ disk size
+- write the following command to start minikube
+  ```bash
+       minikube start --cpus 6 --memory 6200 --disk-size=200G
+  ```
+- After this enable ingress on minikube. To do that paste the command below 
+  ```bash
+       minikube addons enable ingress
+  ```
+- Paste teh following command to spin all the services up
+  ```bash
+       kubectl apply -f infra/k8s/
+  ```
+- wait for 10-15 minutes to make sure all the services are successfully running
+  ```bash
+       kubectl get pods
+  ```
+  use the above command to check all the pods are running
+- use the following command to start the application
+  ```bash
+       minikube tunnel
+  ```
+  now, you can access the application using this url http://localhost/
