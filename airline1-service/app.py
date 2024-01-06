@@ -56,9 +56,17 @@ def get_flights():
 def get_flight(flight_no):
     flight = flight_collection.find_one({"flight_no": flight_no}, {'_id': 0})
     if flight:
-        return jsonify(flight)
+        response = {
+            "flight_no": flight["flight_no"],
+            "airline": flight["airline"]["name"],
+            "src": flight["src"]["id"],
+            "dst": flight["dest"]["id"],
+            "price": flight["price"],
+            "rating": flight["airline"]["rating"]
+        }
+        return jsonify(response)
     else:
-        return "Flight not found", 404
+        return jsonify({"error": "Flight not found"}), 404
 
 # update price according to the rating of airline
 @app.route('/api/v1/airline1-service/flights/update-prices', methods=['POST'])
@@ -122,7 +130,7 @@ def send_flight_info_to_queue(flight_info):
         channel.exchange_declare(exchange=rabbitmq_exchange, exchange_type='direct', durable=True)
         channel.queue_declare(queue=rabbitmq_queue, durable=True)
         channel.queue_bind(queue=rabbitmq_queue, exchange=rabbitmq_exchange, routing_key=rabbitmq_routing_key)
-        
+
         channel.basic_publish(exchange=rabbitmq_exchange,
                               routing_key=rabbitmq_routing_key,
                               body=flight_info)
