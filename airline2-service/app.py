@@ -56,9 +56,17 @@ def get_flights():
 def get_flight(flight_no):
     flight = flight_collection.find_one({"flight_no": flight_no}, {'_id': 0})
     if flight:
-        return jsonify(flight)
+        response = {
+            "flight_no": flight["flight_no"],
+            "airline": flight["airline"]["name"],
+            "src": flight["src"]["id"],
+            "dst": flight["dest"]["id"],
+            "price": flight["price"],
+            "rating": flight["airline"]["rating"]
+        }
+        return jsonify(response)
     else:
-        return "Flight not found", 404
+        return jsonify({"error": "Flight not found"}), 404
 
 # update price according to the rating of airline
 @app.route('/api/v1/airline2-service/flights/update-prices', methods=['POST'])
